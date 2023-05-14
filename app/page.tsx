@@ -1,9 +1,12 @@
 import variables from './styles/variables.module.scss';
+import Container from './components/Container'
 
-export default function Home() {
+const Home = () => {
   return (
-        <>
-            test
-        </>  
+        <Container>
+            Test
+        </Container> 
     )
 }
+
+export default Home
