@@ -1,12 +1,11 @@
-import variables from './styles/variables.module.scss';
-import Container from './components/Container'
-import Navbar from './components/Navbar';
+import Container from "./components/Container"
+import Navbar from "./components/Navbar"
 
 const Home = () => {
-  return (
+    return (
         <Container>
             <Navbar />
-        </Container> 
+        </Container>
     )
 }
 
