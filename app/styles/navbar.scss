@@ -1,0 +1,39 @@
+.navbar
+{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 50px 3% 0;
+    position: fixed;
+    inset: 0 0 auto 0;
+    
+    .searchForm
+    {
+        position: relative;
+        flex-basis: 22%;
+        
+        .formControl 
+        {
+            text-align: center;
+            padding-right: 35px;
+        }
+        
+        .btn 
+        {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            bottom: 4px;
+            aspect-ratio: 1/1;
+            padding: 0;
+        }
+    }
+    
+    .buttons
+    {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}

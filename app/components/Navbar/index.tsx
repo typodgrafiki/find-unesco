@@ -3,17 +3,17 @@ import Button from "../Button"
 import Language from "./Language"
 import Logo from "./Logo"
 import Search from "./Search"
-import css from "../../styles/navbar.module.scss"
+import "../../styles/navbar.scss"
 
 const Navbar = () => {
     return (
-        <div className={css.navbar}>
+        <div className="navbar">
             <Logo />
             <Search />
-            <div className={css.navbarButtons}>
-                <Button>Share your home</Button>
+            <div className="buttons">
+                <Button className="btn">Share your home</Button>
                 <Language />
-                <Button>Login</Button>
+                <Button className="btn">Login</Button>
             </div>
         </div>
     )

@@ -1,12 +1,12 @@
 import Container from "./components/Container"
-import Navbar from "./components/Navbar"
+import Homepage from "./pages/Home"
 
-const Home = () => {
+const Page = () => {
     return (
         <Container>
-            <Navbar />
+            <Homepage />
         </Container>
     )
 }
 
-export default Home
+export default Page

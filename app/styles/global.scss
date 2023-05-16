@@ -1,3 +1,19 @@
+:root 
+{
+    --dark: #111D25;
+    --primary: #cba97a;
+}
+
+.transition
+{
+    transition: all .3s ease;       
+}
+
+.shadow
+{
+    box-shadow: 0 10px 20px rgba(0 0 0 / 20%);    
+}
+
 html 
 {
     font-size: 62.5%;
@@ -6,9 +22,26 @@ html
 body 
 {
     margin: 0;
-    background-color: #111D25;
+    background-color: var(--dark);
     color: #fff;
     font-size: 1.5rem;
+}
+
+a 
+{
+    color: inherit;
+    
+    &:hover 
+    {
+        color: var(--primary);
+    }
+}
+
+.container 
+{
+    margin: 0 auto;
+    max-width: 1310px;
+    padding: 0 10px;
 }
 
 .flex 
@@ -19,5 +52,85 @@ body
 .btn 
 {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size: 1.4rem;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+    color: #3C4042;
+    @extend .transition;
+}
+
+.btnDark
+{
+    background-color: #111D25;
+    color: #fff;
+}
+
+.formControl
+{
+    height: 47px;
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    border-radius: 40px;
+    border: none;
+    @extend .shadow;
+    @extend .transition;
+}
+
+.dropdown 
+{
+    position: relative;
+}
+
+.dropdownMenu
+{
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    opacity: 0;
+    transform:translateX(-50%);
+    visibility: hidden;
+    @extend .transition;
+    margin-top: 20px;
+    list-style: none;
+    background-color: #fff;
+    @extend .shadow;
+    border-radius: 13px;
+    padding: 15px 20px;
+    font-size: 1.4rem;
+    color: var(--dark);
+    text-align: center;
+    
+    & > li > a
+    {
+        text-decoration: none;
+        font-size: inherit;
+        color: inherit;
+        display: block;
+        padding: 1px 0;
+        @extend .transition;
+        
+        &:hover, &.active
+        {
+            color: var(--primary);
+        }
+    }
+}
+
+.open
+{
+    & > .btn 
+    {
+        opacity: .6;
+    }
+    
+    .dropdownMenu
+    {
+        margin-top: 5px;
+        visibility: visible;
+        opacity: 1;
+    }
 }
