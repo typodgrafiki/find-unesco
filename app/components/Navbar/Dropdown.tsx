@@ -11,15 +11,15 @@ interface IDropdownProps {
     lang?: boolean
 }
 
-const DropdownLi = ({ label }) => {
+const DropdownLi = ({ data }) => {
     return (
         <li>
-            <a>{label}</a>
+            <a href={data.url}>{data.label}</a>
         </li>
     )
 }
 
-const Dropdown: React.FC<IDropdownProps> = ({ label, dropdownEl, lang }) => {
+const Dropdown: React.FC<IDropdownProps> = ({ data }) => {
     const [isOpen, setIsOpen] = useState(false)
     const dropdownRef = useRef(null)
 
@@ -51,22 +51,24 @@ const Dropdown: React.FC<IDropdownProps> = ({ label, dropdownEl, lang }) => {
             <Button
                 className="btn"
                 onClick={handleButtonClick}
-                icon={lang ? true : false}
+                icon={data.lang ? true : false}
             >
-                {lang ? 
+                {data.lang ? (
                     <Image
                         src={flag.src}
                         width={21}
                         height={21}
                         alt="Language"
-                    /> 
-                : label}
+                    />
+                ) : (
+                    data.label
+                )}
             </Button>
             <ul className="dropdownMenu">
-                {dropdownEl.map((item, index) => (
-                    <DropdownLi 
-                        label={item} 
-                        key={index} 
+                {data.options.map((item, index) => (
+                    <DropdownLi
+                        data={item}
+                        key={index}
                     />
                 ))}
             </ul>
