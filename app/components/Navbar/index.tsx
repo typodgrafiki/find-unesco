@@ -1,60 +1,33 @@
 "use client"
+import { dropdownData } from "@/app/utils/dropdownData"
 import Button from "../Button"
 import Dropdown from "./Dropdown"
 import Logo from "./Logo"
 import Search from "./Search"
 import "../../styles/navbar.scss"
 
-const dropdownData = [
-    {
-        label: "Language",
-        options: [
-            {
-                label: "English",
-                url: "wefwe",
-            },
-            {
-                label: "German",
-                url: "gr",
-            },
-            {
-                label: "Polish",
-                url: "gr",
-            },
-        ],
-        lang: true,
-    },
-    {
-        label: "Login",
-        options: [
-            {
-                label: "Login",
-                url: "dsdgdf",
-            },
-            {
-                label: "Sign in",
-                url: "dsdgdf",
-            },
-            {
-                label: "Logout",
-                url: "dsdgdf",
-            },
-        ],
-    },
-]
-
 const Navbar = () => {
+    const handlerAddPlace = () => {
+        return null
+    }
+
     return (
         <div className="navbar">
             <Logo />
             <Search />
             <div className="buttons">
-                <Button className="btn">Share your home</Button>
-
-                {dropdownData.map((item, index) => (
+                <Button
+                    className="btn btn-add-place"
+                    onClick={handlerAddPlace}
+                >
+                    Add place
+                </Button>
+                {dropdownData.map((item) => (
                     <Dropdown
-                        data={item}
-                        key={index}
+                        label={item.label}
+                        options={item.options}
+                        lang={item.lang}
+                        key={item.label}
                     />
                 ))}
             </div>

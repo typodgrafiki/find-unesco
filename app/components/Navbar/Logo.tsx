@@ -6,9 +6,9 @@ const Logo = () => {
     return (
         <Image
             src={logoImg.src}
-            width={227}
-            height={26}
-            alt="Logo Cosmo Cozies"
+            width={222}
+            height={30}
+            alt="Logo Find Unesco"
         />
     )
 }

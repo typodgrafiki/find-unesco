@@ -5,17 +5,17 @@ import Button from "../Button"
 import img from "../../assets/images/flag.svg"
 
 const Language = () => {
-    const [langIsOpen, setLangIsOpen] = useState(false)
-    const dropdownRef = useRef(null)
+    const [langIsOpen, setLangIsOpen] = useState<boolean>(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
 
     const handleButtonClick = () => {
         setLangIsOpen(!langIsOpen)
     }
 
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
         if (
             dropdownRef.current &&
-            !dropdownRef.current.contains(event.target)
+            !dropdownRef.current.contains(event.target as Node)
         ) {
             setLangIsOpen(false)
         }

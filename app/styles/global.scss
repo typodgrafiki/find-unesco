@@ -11,7 +11,7 @@
 
 .shadow
 {
-    box-shadow: 0 10px 20px rgba(0 0 0 / 20%);    
+    box-shadow: 0 10px 20px rgba(0 0 0 / 10%);    
 }
 
 html 
@@ -22,12 +22,12 @@ html
 body 
 {
     margin: 0;
-    background-color: var(--dark);
-    color: #fff;
+    background-color: #fff;
+    color: var(--dark);
     font-size: 1.5rem;
 }
 
-a 
+a
 {
     color: inherit;
     
@@ -126,11 +126,12 @@ a
     {
         opacity: .6;
     }
-    
-    .dropdownMenu
-    {
-        margin-top: 5px;
-        visibility: visible;
-        opacity: 1;
-    }
+}
+
+.open .dropdownMenu,
+.dropdownMenu.show
+{
+    margin-top: 5px;
+    visibility: visible;
+    opacity: 1;
 }

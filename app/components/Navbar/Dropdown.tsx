@@ -3,34 +3,28 @@ import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Button from "../Button"
 import flag from "../../assets/images/flag.svg"
+import { IDropdownProps, IDropdownLiProps } from "@/app/utils/dropdownData"
 
-interface IDropdownProps {
-    children: React.ReactNode
-    label: string
-    dropdownEl: Array
-    lang?: boolean
-}
-
-const DropdownLi = ({ data }) => {
+const DropdownLi: React.FC<IDropdownLiProps> = ({ url, label }) => {
     return (
         <li>
-            <a href={data.url}>{data.label}</a>
+            <a href={url}>{label}</a>
         </li>
     )
 }
 
-const Dropdown: React.FC<IDropdownProps> = ({ data }) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const dropdownRef = useRef(null)
+const Dropdown: React.FC<IDropdownProps> = ({ label, options, lang }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
 
     const handleButtonClick = () => {
         setIsOpen(!isOpen)
     }
 
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
         if (
             dropdownRef.current &&
-            !dropdownRef.current.contains(event.target)
+            !dropdownRef.current.contains(event.target as Node)
         ) {
             setIsOpen(false)
         }
@@ -51,9 +45,9 @@ const Dropdown: React.FC<IDropdownProps> = ({ data }) => {
             <Button
                 className="btn"
                 onClick={handleButtonClick}
-                icon={data.lang ? true : false}
+                icon={lang ? true : false}
             >
-                {data.lang ? (
+                {lang ? (
                     <Image
                         src={flag.src}
                         width={21}
@@ -61,14 +55,15 @@ const Dropdown: React.FC<IDropdownProps> = ({ data }) => {
                         alt="Language"
                     />
                 ) : (
-                    data.label
+                    label
                 )}
             </Button>
             <ul className="dropdownMenu">
-                {data.options.map((item, index) => (
+                {options.map((item) => (
                     <DropdownLi
-                        data={item}
-                        key={index}
+                        url={item.url}
+                        label={item.label}
+                        key={item.label}
                     />
                 ))}
             </ul>

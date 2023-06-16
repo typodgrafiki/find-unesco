@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     display: flex;
-    padding: 50px 3% 0;
+    padding: 35px 3% 0;
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 10;
@@ -36,5 +36,10 @@
         align-items: center;
         justify-content: flex-end;
         gap: 10px;
+    }
+    
+    .btn-add-place
+    {
+        opacity: .6;
     }
 }

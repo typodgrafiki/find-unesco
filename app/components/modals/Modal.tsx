@@ -1,8 +1,8 @@
 "use client"
-import React, { useState } from "react"
+// import React, { useState } from "react"
 
 const Modal = () => {
-    const [showModal, setShowModal] = useState(false)
+    // const [showModal, setShowModal] = useState(false)
 
     return <div className="modal">modal</div>
 }
