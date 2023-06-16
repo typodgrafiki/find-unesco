@@ -21,18 +21,22 @@ const Search = () => {
 
     const handlePlacesChange = (event: MouseEvent | KeyboardEvent) => {
         const { name, value, checked } = event.target
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: checked
-                ? [...prevFormData[name], value]
-                : prevFormData[name].filter((item) => item !== value),
-        }))
+
+        console.log(name, value, checked)
+
+        // setFormData((prevFormData) => ({
+        //     ...prevFormData,
+        //     [name]: checked
+        //         ? [...prevFormData[name], value]
+        //         : prevFormData[name].filter((item) => item !== value),
+        // }))
     }
 
     const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
         event.preventDefault()
-        console.log("Miasta:", cities)
-        console.log("Rodzaje:", types)
+        console.log("Miasta:", formData.cities)
+        console.log("Typy:", formData.types)
+        console.log("Kontynenty:", formData.continents)
     }
 
     useEffect(() => {
@@ -76,19 +80,19 @@ const Search = () => {
             {openSearch && (
                 <SearchDropdown
                     formData={formData}
-                    handlePlacesChange={handlePlacesChange}
-                    handleSubmit={handleSubmit}
+                    handlePlacesChangeFn={handlePlacesChange}
+                    handleSubmitFn={handleSubmit}
                 />
             )}
         </>
     )
 }
 
-const SearchDropdown = (handlePlacesChange, handleSubmit) => {
+const SearchDropdown = ({ handlePlacesChangeFn, handleSubmitFn }) => {
     return (
         <form
             className="dropdownMenu show"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitFn}
         >
             <ul>
                 <li>
@@ -112,19 +116,19 @@ const SearchDropdown = (handlePlacesChange, handleSubmit) => {
                     type="checkbox"
                     name="cities"
                     value="Poznań"
-                    onChange={handlePlacesChange}
+                    onChange={handlePlacesChangeFn}
                 />
                 <input
                     type="checkbox"
                     value="Przyroda"
                     name="types"
-                    onChange={handlePlacesChange}
+                    onChange={handlePlacesChangeFn}
                 />
                 <input
                     type="checkbox"
                     value="Góry"
                     name="types"
-                    onChange={handlePlacesChange}
+                    onChange={handlePlacesChangeFn}
                 />
             </div>
             <div>
