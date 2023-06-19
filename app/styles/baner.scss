@@ -5,7 +5,8 @@
     video
     {
         width: 100%;
-        height: auto;
+        height: 100vh;
+        object-fit: cover;
     }
     
     .caption 
@@ -21,11 +22,12 @@
         font-size: 39px;
         font-weight: 500;
         margin: 0 0 7px;
+        color: #fff;
     }
     
     p 
     {
-        color: #BFD4D6;
+        color: #c4cccd;
         font-size: 1.8rem;
         font-weight: 300;
         margin: 0 0 20px;
