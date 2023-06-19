@@ -13,13 +13,35 @@
         position: relative;
         flex-basis: 22%;
         
+        .dropdownMenu
+        {
+            width: 90vh;
+        }
+        
         .formControl 
         {
             text-align: center;
             padding-right: 35px;
+            
+            &.blocked,
+            &:focus-visible,
+            &:focus 
+            {
+                cursor: not-allowed;
+                padding-right: 20px;
+                opacity: .7;
+                border: none;
+                outline: none;
+                
+                & ~ .btn
+                {
+                    right: -45px;
+                    opacity: 0;
+                }
+            }
         }
         
-        .btn 
+        .btn-icon
         {
             position: absolute;
             top: 4px;
@@ -27,6 +49,7 @@
             bottom: 4px;
             aspect-ratio: 1/1;
             padding: 0;
+            transition: all .3s ease;
         }
     }
     
@@ -41,5 +64,24 @@
     .btn-add-place
     {
         opacity: .6;
+    }
+    
+    .rowTypes input:checked + label
+    {
+        color: red;
+    }
+    
+    .rowCountries input:checked + label
+    {
+        color: green;
+    }
+    
+    .rowCountries ul
+    {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        text-align: left;
+        columns: 4;
     }
 }

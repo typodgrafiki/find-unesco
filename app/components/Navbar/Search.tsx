@@ -1,42 +1,55 @@
 "use client"
 import React, { useEffect, useState, useRef } from "react"
 import Image from "next/image"
+import axios from "axios"
+import { parseString } from "xml2js"
 import Button from "../Button"
+import listPlaces from "@/app/utils/listPlacesUnesco.json"
 import img from "../../assets/images/search.svg"
 
 interface IFormProps {
-    continents: string[]
     cities: string[]
     types: string[]
 }
 
 const Search = () => {
     const inputRef = useRef<HTMLInputElement | null>(null)
+    const formRef = useRef<HTMLFormElement | null>(null)
     const [openSearch, setOpenSearch] = useState<boolean>(false)
     const [formData, setFormData] = useState<IFormProps>({
-        continents: [],
         cities: [],
         types: [],
     })
 
     const handlePlacesChange = (event: MouseEvent | KeyboardEvent) => {
-        const { name, value, checked } = event.target
+        const { name: typesName, value, checked } = event.target
 
-        console.log(name, value, checked)
+        console.log(typesName, value, checked)
 
-        // setFormData((prevFormData) => ({
-        //     ...prevFormData,
-        //     [name]: checked
-        //         ? [...prevFormData[name], value]
-        //         : prevFormData[name].filter((item) => item !== value),
-        // }))
+        setFormData((formData) => {
+            if (checked) {
+                if (!formData[typesName].includes(value)) {
+                    return {
+                        ...formData,
+                        [typesName]: [...formData[typesName], value],
+                    }
+                }
+            } else {
+                return {
+                    ...formData,
+                    [typesName]: formData[typesName].filter(
+                        (item) => item !== value
+                    ),
+                }
+            }
+            return formData
+        })
     }
 
     const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
         event.preventDefault()
         console.log("Miasta:", formData.cities)
         console.log("Typy:", formData.types)
-        console.log("Kontynenty:", formData.continents)
     }
 
     useEffect(() => {
@@ -55,18 +68,25 @@ const Search = () => {
 
     return (
         <>
-            <form className="searchForm flex">
+            <form
+                className="searchForm flex"
+                ref={formRef}
+                onSubmit={handleSubmit}
+            >
                 <input
                     ref={inputRef}
                     placeholder="Search for a place..."
                     type="text"
-                    className="formControl"
+                    className={
+                        openSearch ? "formControl blocked" : "formControl"
+                    }
                     onFocus={() => setOpenSearch(true)}
+                    value={formData.cities.map((element) => " " + element)}
                 />
                 <Button
                     icon
                     dark
-                    className="btn"
+                    className="btn btn-icon"
                 >
                     <Image
                         src={img.src}
@@ -75,68 +95,90 @@ const Search = () => {
                         alt="search"
                     />
                 </Button>
+                {openSearch && (
+                    <SearchDropdown handlePlacesChangeFn={handlePlacesChange} />
+                )}
             </form>
-
-            {openSearch && (
-                <SearchDropdown
-                    formData={formData}
-                    handlePlacesChangeFn={handlePlacesChange}
-                    handleSubmitFn={handleSubmit}
-                />
-            )}
         </>
     )
 }
 
-const SearchDropdown = ({ handlePlacesChangeFn, handleSubmitFn }) => {
+const SearchDropdown = ({ handlePlacesChangeFn }) => {
     return (
-        <form
-            className="dropdownMenu show"
-            onSubmit={handleSubmitFn}
-        >
-            <ul>
-                <li>
-                    Europa
-                    <ul>
-                        <li>Polska</li>
-                        <li>Niemcy</li>
-                        <li>Hiszpania</li>
-                    </ul>
-                </li>
-                <li>
-                    Azja
-                    <ul>
-                        <li>Japonia</li>
-                        <li>Tajlandia</li>
-                    </ul>
-                </li>
-            </ul>
-            <div>
-                <input
-                    type="checkbox"
-                    name="cities"
-                    value="Poznań"
-                    onChange={handlePlacesChangeFn}
-                />
-                <input
-                    type="checkbox"
-                    value="Przyroda"
-                    name="types"
-                    onChange={handlePlacesChangeFn}
-                />
-                <input
-                    type="checkbox"
-                    value="Góry"
-                    name="types"
-                    onChange={handlePlacesChangeFn}
-                />
+        <div className="dropdownMenu show">
+            <div className="rowCountries">
+                {listPlaces.places.map((element) => (
+                    <ListPlacesLi
+                        element={element}
+                        key={Object.keys(element)}
+                        handlePlacesChangeFn={handlePlacesChangeFn}
+                    />
+                ))}
+            </div>
+            <div className="rowTypes flex flexCenter">
+                {listPlaces.types.map((element) => (
+                    <div key={element}>
+                        <input
+                            id={element}
+                            type="checkbox"
+                            name="types"
+                            value={element}
+                            onChange={handlePlacesChangeFn}
+                            hidden
+                        />
+                        <label
+                            className="btn"
+                            htmlFor={element}
+                        >
+                            IMG {element}
+                        </label>
+                    </div>
+                ))}
             </div>
             <div>
-                <Button>Wyczyść</Button>
-                <Button type="submit">Szukaj</Button>
+                <Button
+                    type="submit"
+                    className="btn"
+                    primary
+                >
+                    Szukaj
+                </Button>
             </div>
-        </form>
+        </div>
     )
 }
+
+const ListPlacesLi = ({ element, handlePlacesChangeFn }) => {
+    const countriesList: string[] = Object.values(element)[0]
+
+    return (
+        <>
+            <div>
+                <h3>{Object.keys(element)}</h3>
+                <ul>
+                    {countriesList.map((element) => (
+                        <li key={element}>
+                            <input
+                                id={element}
+                                type="checkbox"
+                                name="cities"
+                                value={element}
+                                onChange={handlePlacesChangeFn}
+                                hidden
+                            />
+                            <label
+                                className="btn"
+                                htmlFor={element}
+                            >
+                                {element}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </>
+    )
+}
+
 
 export default Search
