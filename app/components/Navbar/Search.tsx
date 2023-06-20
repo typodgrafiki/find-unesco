@@ -1,8 +1,6 @@
 "use client"
 import React, { useEffect, useState, useRef } from "react"
 import Image from "next/image"
-import axios from "axios"
-import { parseString } from "xml2js"
 import Button from "../Button"
 import listPlaces from "@/app/utils/listPlacesUnesco.json"
 import img from "../../assets/images/search.svg"
@@ -13,7 +11,6 @@ interface IFormProps {
 }
 
 const Search = () => {
-    const inputRef = useRef<HTMLInputElement | null>(null)
     const formRef = useRef<HTMLFormElement | null>(null)
     const [openSearch, setOpenSearch] = useState<boolean>(false)
     const [formData, setFormData] = useState<IFormProps>({
@@ -48,20 +45,33 @@ const Search = () => {
 
     const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
         event.preventDefault()
-        console.log("Miasta:", formData.cities)
-        console.log("Typy:", formData.types)
+        console.log("Miasta:", formData.cities.toString())
+        console.log("Typy:", formData.types.toString())
+
+        // router.push({
+        //     pathname: "/search",
+        //     query: {
+        //         type: formData.types.toString(),
+        //         location: formData.cities.toString(),
+        //     },
+        // })
     }
 
     useEffect(() => {
         const handleEsc = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
+            if (
+                event.key === "Escape" ||
+                (formRef.current && !formRef.current.contains(event.target))
+            ) {
                 setOpenSearch(false)
             }
         }
 
         document.addEventListener("keydown", handleEsc)
+        document.addEventListener("mousedown", handleEsc)
 
         return () => {
+            document.removeEventListener("mousedown", handleEsc)
             document.removeEventListener("keydown", handleEsc)
         }
     }, [])
@@ -73,7 +83,7 @@ const Search = () => {
                 ref={formRef}
                 onSubmit={handleSubmit}
             >
-                <input
+                {/* <input
                     ref={inputRef}
                     placeholder="Search for a place..."
                     type="text"
@@ -82,7 +92,19 @@ const Search = () => {
                     }
                     onFocus={() => setOpenSearch(true)}
                     value={formData.cities.map((element) => " " + element)}
-                />
+                /> */}
+
+                <div
+                    className={
+                        openSearch ? "formControl blocked" : "formControl"
+                    }
+                    onClick={() => setOpenSearch(true)}
+                >
+                    {formData.cities[0]
+                        ? formData.cities.map((element) => element + ", ")
+                        : "Search for a place..."}
+                </div>
+
                 <Button
                     icon
                     dark
