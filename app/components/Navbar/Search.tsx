@@ -1,12 +1,12 @@
 "use client"
 import React, { useEffect, useState, useRef } from "react"
 import Image from "next/image"
-import Button from "../Button"
 import listPlaces from "@/app/utils/listPlacesUnesco.json"
-import img from "../../assets/images/search.svg"
+import img from "@/app/assets/images/search.svg"
+import { useRouter } from "next/navigation"
 
 interface IFormProps {
-    cities: string[]
+    locations: string[]
     types: string[]
 }
 
@@ -14,14 +14,16 @@ const Search = () => {
     const formRef = useRef<HTMLFormElement | null>(null)
     const [openSearch, setOpenSearch] = useState<boolean>(false)
     const [formData, setFormData] = useState<IFormProps>({
-        cities: [],
+        locations: [],
         types: [],
     })
+
+    const router = useRouter()
 
     const handlePlacesChange = (event: MouseEvent | KeyboardEvent) => {
         const { name: typesName, value, checked } = event.target
 
-        console.log(typesName, value, checked)
+        // console.log(typesName, value, checked)
 
         setFormData((formData) => {
             if (checked) {
@@ -45,16 +47,46 @@ const Search = () => {
 
     const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
         event.preventDefault()
-        console.log("Miasta:", formData.cities.toString())
-        console.log("Typy:", formData.types.toString())
+        // console.log("Kraje:", formData.locations.toString())
+        // console.log("Typy:", formData.types.toString())
 
-        // router.push({
-        //     pathname: "/search",
-        //     query: {
-        //         type: formData.types.toString(),
-        //         location: formData.cities.toString(),
-        //     },
-        // })
+        const url = () => {
+            const returnLocations: string | null = (() => {
+                if (formData.locations[0]) {
+                    const location = formData.locations.toString()
+                    return `locations=${location}`
+                } else {
+                    return ""
+                }
+            })()
+
+            const returnTypes: string | null = (() => {
+                if (formData.types[0]) {
+                    const type = formData.types.toString()
+                    return `types=${type}`
+                } else {
+                    return ""
+                }
+            })()
+
+            const result: string = (() => {
+                const both: string | null = (() => {
+                    return returnLocations && returnTypes ? "&" : ""
+                })()
+
+                return `/search?${returnLocations}${both}${returnTypes}`
+            })()
+
+            return result
+        }
+
+        router.push(url())
+
+        setOpenSearch(false)
+        setFormData({
+            locations: [],
+            types: [],
+        })
     }
 
     useEffect(() => {
@@ -83,40 +115,25 @@ const Search = () => {
                 ref={formRef}
                 onSubmit={handleSubmit}
             >
-                {/* <input
-                    ref={inputRef}
-                    placeholder="Search for a place..."
-                    type="text"
-                    className={
-                        openSearch ? "formControl blocked" : "formControl"
-                    }
-                    onFocus={() => setOpenSearch(true)}
-                    value={formData.cities.map((element) => " " + element)}
-                /> */}
-
                 <div
                     className={
                         openSearch ? "formControl blocked" : "formControl"
                     }
                     onClick={() => setOpenSearch(true)}
                 >
-                    {formData.cities[0]
-                        ? formData.cities.map((element) => element + ", ")
+                    {formData.locations[0]
+                        ? formData.locations.map((element) => element + ", ")
                         : "Search for a place..."}
                 </div>
 
-                <Button
-                    icon
-                    dark
-                    className="btn btn-icon"
-                >
+                <button className="btn btnIcon btnDark">
                     <Image
                         src={img.src}
                         width={18}
                         height={18}
                         alt="search"
                     />
-                </Button>
+                </button>
                 {openSearch && (
                     <SearchDropdown handlePlacesChangeFn={handlePlacesChange} />
                 )}
@@ -158,13 +175,12 @@ const SearchDropdown = ({ handlePlacesChangeFn }) => {
                 ))}
             </div>
             <div>
-                <Button
+                <button
                     type="submit"
-                    className="btn"
-                    primary
+                    className="btn btnPrimary"
                 >
                     Szukaj
-                </Button>
+                </button>
             </div>
         </div>
     )
@@ -183,7 +199,7 @@ const ListPlacesLi = ({ element, handlePlacesChangeFn }) => {
                             <input
                                 id={element}
                                 type="checkbox"
-                                name="cities"
+                                name="locations"
                                 value={element}
                                 onChange={handlePlacesChangeFn}
                                 hidden
@@ -201,6 +217,5 @@ const ListPlacesLi = ({ element, handlePlacesChangeFn }) => {
         </>
     )
 }
-
 
 export default Search

@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import Button from "../Button"
 import flag from "../../assets/images/flag.svg"
 import { IDropdownProps, IDropdownLiProps } from "@/app/utils/dropdownData"
 
@@ -42,10 +41,9 @@ const Dropdown: React.FC<IDropdownProps> = ({ label, options, lang }) => {
             className={`dropdown ${isOpen ? "open" : ""}`}
             ref={dropdownRef}
         >
-            <Button
-                className="btn"
+            <button
+                className={lang ? "btn btnIcon" : "btn"}
                 onClick={handleButtonClick}
-                icon={lang ? true : false}
             >
                 {lang ? (
                     <Image
@@ -57,7 +55,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ label, options, lang }) => {
                 ) : (
                     label
                 )}
-            </Button>
+            </button>
             <ul className="dropdownMenu">
                 {options.map((item) => (
                     <DropdownLi

@@ -1,3 +1,5 @@
+
+
 :root 
 {
     --dark: #111D25;
@@ -22,7 +24,7 @@ html
 body 
 {
     margin: 0;
-    background-color: #fff;
+    background-color: #ecebea;
     color: var(--dark);
     font-size: 1.5rem;
 }
@@ -67,10 +69,29 @@ a
     @extend .transition;
 }
 
+.btnIcon 
+{
+    padding: 7px 15px 5px;
+    min-width: 35px;
+    min-height: 35px;
+}
+
 .btnDark
 {
     background-color: #111D25;
     color: #fff;
+}
+
+.btnPrimary
+{
+    background-color: #cba97a;
+    color: #191a1c;
+}
+
+.btnBig
+{
+    padding: 18px 28px;
+    font-size: 1.6rem;
 }
 
 .formControl

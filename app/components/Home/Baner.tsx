@@ -1,6 +1,3 @@
-"use client"
-
-import Button from "@/app/components/Button"
 import "@/app/styles/baner.scss"
 
 const Baner = () => {
@@ -20,13 +17,7 @@ const Baner = () => {
                     Chinese misty forest, surrounded by mystical trees. A unique
                     experience for nature lovers.
                 </p>
-                <Button
-                    primary
-                    big
-                    className="btn"
-                >
-                    Show object
-                </Button>
+                <button className="btn btnBig btnPrimary">Show object</button>
             </div>
         </div>
     )

@@ -1,7 +1,5 @@
-"use client"
 import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import Button from "../Button"
 import img from "../../assets/images/flag.svg"
 
 const Language = () => {
@@ -33,9 +31,8 @@ const Language = () => {
             className={`dropdown ${langIsOpen ? "open" : ""}`}
             ref={dropdownRef}
         >
-            <Button
-                className="btn"
-                icon
+            <button
+                className="btn btnIcon"
                 onClick={handleButtonClick}
             >
                 <Image
@@ -44,7 +41,7 @@ const Language = () => {
                     height={21}
                     alt="Language"
                 />
-            </Button>
+            </button>
             <ul className="dropdownMenu">
                 <li>
                     <a href="btn">English</a>

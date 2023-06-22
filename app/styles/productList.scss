@@ -1,0 +1,17 @@
+.productList
+{
+    --grid_column: 4;
+    display: grid;
+    grid-template-columns: repeat(var(--grid_column),1fr);
+    gap: 20px;
+    grid-auto-flow: dense;
+    
+    .image img
+    {
+        object-fit: cover;  
+        width: 100%;
+        aspect-ratio: 16/9;
+        height: auto;  
+        border-radius: 10px;
+    }
+}

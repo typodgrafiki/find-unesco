@@ -35,15 +35,15 @@ const dropdownData: DropdownData = [
         options: [
             {
                 label: "Login",
-                url: "dsdgdf",
+                url: "/login",
             },
             {
                 label: "Sign in",
-                url: "dsdwegdf",
+                url: "/sign-in",
             },
             {
                 label: "Logout",
-                url: "dsdgdf",
+                url: "/logout",
             },
         ],
     },

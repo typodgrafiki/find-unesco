@@ -1,14 +1,23 @@
-import Container from "./components/Container"
-import Homepage from "./pages/Home"
-import Modal from "./components/modals/Modal"
+import dynamic from "next/dynamic"
+import Baner from "@/app/components/Home/Baner"
+import ProductList from "@/app/components/ProductList/ProductList"
 
-const Page = () => {
+const ProductListLoad = dynamic(
+    () => import("@/app/components/ProductList/ProductList"),
+    {
+        loading: () => <p>Loading...</p>,
+    }
+)
+
+const Homepage = () => {
     return (
-        <Container>
-            <Homepage />
-            <Modal />
-        </Container>
+        <>
+            <Baner />
+            <div className="container">
+                <ProductListLoad />
+            </div>
+        </>
     )
 }
 
-export default Page
+export default Homepage

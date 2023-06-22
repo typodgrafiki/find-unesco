@@ -1,6 +1,9 @@
-import './styles/global.scss'
-import { Poppins } from 'next/font/google'
+import Navbar from "@/app/components/Navbar"
+import Footer from "@/app/components/Footer"
+import Modal from "@/app/components/modals/Modal"
+import "@/app/styles/global.scss"
 
+import { Poppins } from "next/font/google"
 const poppins = Poppins({
     subsets: ["latin-ext"],
     weight: ["300", "400", "500"],
@@ -36,7 +39,12 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={poppins.className}>{children}</body>
+            <body className={poppins.className}>
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+                <Modal />
+            </body>
         </html>
     )
 }
