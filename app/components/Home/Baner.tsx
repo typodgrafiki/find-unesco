@@ -10,14 +10,16 @@ const Baner = () => {
             >
                 <source src="/baner1.mp4" />
             </video>
-            <div className="caption">
-                <h2>Misty Forest Retreat</h2>
-                <p>
-                    Discover peace and enchantment in a cottage amidst the
-                    Chinese misty forest, surrounded by mystical trees. A unique
-                    experience for nature lovers.
-                </p>
-                <button className="btn btnBig btnPrimary">Show object</button>
+            <div className="container relative">
+                <div className="caption">
+                    <h2>Misty Forest Retreat</h2>
+                    <p>
+                        Discover peace and enchantment in a cottage amidst the
+                        Chinese misty forest, surrounded by mystical trees. A unique
+                        experience for nature lovers.
+                    </p>
+                    <button className="btn btnBig btnPrimary">Show object</button>
+                </div>
             </div>
         </div>
     )

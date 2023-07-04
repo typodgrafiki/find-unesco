@@ -24,9 +24,10 @@ html
 body 
 {
     margin: 0;
-    background-color: #ecebea;
-    color: var(--dark);
-    font-size: 1.5rem;
+    // background-color: #ecebea;
+    background-color: #fff;
+    color: #8F9495;
+    font-size: 1.4rem;
 }
 
 a
@@ -39,11 +40,40 @@ a
     }
 }
 
+p 
+{
+    margin: 0;
+}
+
+.relative 
+{
+    position: relative;
+}
+
+.searchLayout
+{
+    padding-top: 120px;
+}
+
 .container 
 {
     margin: 0 auto;
     max-width: 1310px;
     padding: 0 10px;
+}
+
+.title, .name 
+{
+    color: var(--dark);
+    font-weight: 500;
+    line-height: 130%;
+}
+
+.title 
+{
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 32px 0;
 }
 
 .flex 
@@ -56,16 +86,27 @@ a
     justify-content: center;
 }
 
+.flexAlignCenter
+{
+    align-items: center;
+}
+
+.flexJustifyBetween
+{
+    justify-content: space-between;
+}
+
 .btn 
 {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 40px;
     font-size: 1.4rem;
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
     background-color: #fff;
     color: #3C4042;
+    text-decoration: none;
     @extend .transition;
 }
 
@@ -74,6 +115,11 @@ a
     padding: 7px 15px 5px;
     min-width: 35px;
     min-height: 35px;
+}
+
+.btnDefault 
+{
+    border-color: #D6D1CA;
 }
 
 .btnDark

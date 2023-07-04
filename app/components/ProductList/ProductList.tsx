@@ -1,51 +1,54 @@
-// import data from "@/app/utils/test.json"
-// import { notFound } from "next/navigation"
+import data from "@/app/utils/listPlacesUnesco.json"
+import Image from "next/image"
 import ProductBox from "./ProductBox"
+import flag from "@/app/assets/images/flags/pl.svg"
 import "@/app/styles/productList.scss"
 
-// Elementy pobierane default "use server"
-// Aby robic to "use client" najlepiej skorzystac z SWR w Next
-
-async function getData() {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-        next: { revalidate: 10 }, // dane sa domyslnie cachowane. To oznacza ze cach bedzie odswiezany po 10 sek
-    })
-
-    if (!res.ok) {
-        throw new Error("failed to fetch data")
-        // return notFound()
-    }
-
-    return res.json()
+interface ProductListProps {
+    country: string;
 }
 
-const ProductList = async () => {
-    const data = await getData()
+const ProductList: FC.React<ProductListProps> = ({ country }) => {
+    
+    const countryLowerCase: string = country.toLowerCase()
 
     // const filteredElements = data.filter(
-    //     (element) => element.region_en === "Europe and North America"
+    //     (element) => element.states_name_en === country
     // )
-    // const randomElements = filteredElements
-    //     .sort(() => 0.5 - Math.random())
-    //     .slice(0, 8)
-
+    
+    const filteredElements = data.filter((element) =>
+        element.states_name_en.includes(country)
+    )
+    
+    const randomElements = filteredElements
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 8)
+        
     return (
         <>
+            <div className="titleRow flex flexJustifyBetween flexAlignCenter">
+                <h2 className="title">
+                    <Image 
+                        src={flag}
+                        alt={country}
+                        width={21}
+                        height={21}
+                    />
+                    {country}
+                </h2>
+                <a href={`/search?country=${countryLowerCase}`} className="btn btnDefault">
+                    Show more
+                </a>
+            </div>
             <div className="productList">
-                {data.map((element) => (
-                    // <ProductBox
-                    //     key={element.link}
-                    //     name={element.name_en}
-                    //     category={element.category}
-                    //     image={element.image}
-                    //     states_name={element.states_name_en}
-                    //     short_description={element.short_description_en}
-                    // />
-
+                {randomElements.map((element) => (
                     <ProductBox
-                        key={element.id}
-                        name={element.title}
-                        short_description={element.body}
+                        key={element.link}
+                        name={element.name_en}
+                        category={element.category}
+                        image={element.image}
+                        states_name={element.states_name_en}
+                        short_description={element.short_description_en}
                     />
                 ))}
             </div>

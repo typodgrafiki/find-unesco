@@ -4,7 +4,7 @@ export interface IUnescoObjestProps {
     longitude: number
     latitude: number
     category: string
-    states_name: string
+    states_name: string[]
     region: string
     iso_code: string
     udnp_code: string
