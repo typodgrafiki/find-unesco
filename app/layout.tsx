@@ -1,12 +1,14 @@
 import Navbar from "@/app/components/Navbar"
 import Footer from "@/app/components/Footer"
 import Modal from "@/app/components/modals/Modal"
+import Newsletter from "./components/Newsletter"
 import "@/app/styles/global.scss"
 
 import { Poppins } from "next/font/google"
+
 const poppins = Poppins({
     subsets: ["latin-ext"],
-    weight: ["300", "400", "500"],
+    weight: ["300", "400", "500", "600"],
 })
 
 export const metadata = {
@@ -42,6 +44,7 @@ export default function RootLayout({
             <body className={poppins.className}>
                 <Navbar />
                 <main>{children}</main>
+                <Newsletter />
                 <Footer />
                 <Modal />
             </body>

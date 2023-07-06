@@ -1,0 +1,29 @@
+.footer
+{
+    background-color: #D6D1CA;
+    
+    ul
+    {
+        margin: 0;
+        list-style: none;
+        display: flex;
+        padding: 30px 20px;
+        gap: 20px;
+        
+        &:not(.social)
+        {
+            flex-basis: 40%;
+        }
+        
+        a
+        {
+            text-decoration: none;
+        }
+    }
+    
+    .copyright
+    {
+        background-color: #fff;
+        padding: 10px 20px;
+    }
+}

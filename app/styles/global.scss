@@ -26,8 +26,10 @@ body
     margin: 0;
     // background-color: #ecebea;
     background-color: #fff;
-    color: #8F9495;
+    // color: #8F9495;
+    color: #3C4042;
     font-size: 1.4rem;
+    font-weight: 300;
 }
 
 a
@@ -62,6 +64,11 @@ p
     padding: 0 10px;
 }
 
+.nowrap 
+{
+    white-space: nowrap;
+}
+
 .title, .name 
 {
     color: var(--dark);
@@ -74,6 +81,16 @@ p
     font-size: 3rem;
     font-weight: 600;
     margin: 32px 0;
+}
+
+.textCenter
+{
+    text-align: center;
+}
+
+.textRight
+{
+    text-align: right;
 }
 
 .flex 
@@ -96,6 +113,11 @@ p
     justify-content: space-between;
 }
 
+.flexJustifyEnd
+{
+    justify-content: flex-end;
+}
+
 .btn 
 {
     display: inline-block;
@@ -108,6 +130,7 @@ p
     color: #3C4042;
     text-decoration: none;
     @extend .transition;
+    font-weight: inherit;
 }
 
 .btnIcon 
@@ -131,7 +154,8 @@ p
 .btnPrimary
 {
     background-color: #cba97a;
-    color: #191a1c;
+    // color: #191a1c;
+    color: #fff;
 }
 
 .btnBig
@@ -146,6 +170,7 @@ p
     display: block;
     width: 100%;
     padding: 0 20px;
+    font-weight: inherit;
     border-radius: 40px;
     border: none;
     @extend .shadow;
