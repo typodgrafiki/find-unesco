@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { IUnescoObjestProps } from "@/app/utils/interfaces"
+import { IUnescoObjestProps } from "@/utils/interfaces"
 
 const ProductBox: React.FC<IUnescoObjestProps> = ({
     name,

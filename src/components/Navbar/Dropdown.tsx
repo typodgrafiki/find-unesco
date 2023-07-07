@@ -1,8 +1,8 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import flag from "../../assets/images/flag.svg"
-import { IDropdownProps, IDropdownLiProps } from "@/app/utils/dropdownData"
+import flag from "@/assets/images/flag.svg"
+import { IDropdownProps, IDropdownLiProps } from "@/utils/dropdownData"
 
 const DropdownLi: React.FC<IDropdownLiProps> = ({ url, label }) => {
     return (

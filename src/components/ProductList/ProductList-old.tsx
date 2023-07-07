@@ -1,8 +1,8 @@
 "use client"
-import data from "@/app/utils/listPlacesUnesco.json"
+import data from "@/lib/listPlacesUnesco.json"
 // import { notFound } from "next/navigation"
 import ProductBox from "./ProductBox"
-import "@/app/styles/productList.scss"
+import "@/styles/productList.scss"
 
 // Elementy pobierane default "use server"
 // Aby robic to "use client" najlepiej skorzystac z SWR w Next

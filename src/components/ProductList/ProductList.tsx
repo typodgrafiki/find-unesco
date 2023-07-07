@@ -1,8 +1,8 @@
-import data from "@/app/utils/listPlacesUnesco.json"
+import data from "@/lib/listPlacesUnesco.json"
 import Image from "next/image"
 import ProductBox from "./ProductBox"
-import flag from "@/app/assets/images/flags/pl.svg"
-import "@/app/styles/productList.scss"
+import flag from "@/assets/images/flags/pl.svg"
+import "@/styles/productList.scss"
 
 interface ProductListProps {
     country: string;

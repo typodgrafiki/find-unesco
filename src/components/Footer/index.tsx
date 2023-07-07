@@ -1,4 +1,4 @@
-import "@/app/styles/footer.scss"
+import "@/styles/footer.scss"
 
 const Footer = () => {
     return (
@@ -7,13 +7,13 @@ const Footer = () => {
                 <div className="container flex flexJustifyBetween flexAlignCenter">
                     <ul>
                         <li>
-                            <a href="/">About project</a>
+                            <a href="/" className="transition">About project</a>
                         </li>
                         <li>
-                            <a href="/">Contact</a>
+                            <a href="/" className="transition">Contact</a>
                         </li>
                         <li>
-                            <a href="/">Buy coffee</a>
+                            <a href="/" className="transition">Buy coffee</a>
                         </li>
                     </ul>
                     <ul className="social">

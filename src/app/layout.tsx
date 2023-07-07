@@ -1,8 +1,8 @@
-import Navbar from "@/app/components/Navbar"
-import Footer from "@/app/components/Footer"
-import Modal from "@/app/components/modals/Modal"
-import Newsletter from "./components/Newsletter"
-import "@/app/styles/global.scss"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import Modal from "@/components/modals/Modal"
+import Newsletter from "@/components/Newsletter"
+import "@/styles/global.scss"
 
 import { Poppins } from "next/font/google"
 

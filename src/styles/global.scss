@@ -8,7 +8,7 @@
 
 .transition
 {
-    transition: color backgroundColor .3s ease;       
+    transition: all .3s ease;       
 }
 
 .shadow
@@ -145,7 +145,8 @@ p
     border-color: #D6D1CA;
 }
 
-.btnDark
+.btnDark,
+.btnDefault:is(:hover, :focus, :active)
 {
     background-color: #111D25;
     color: #fff;
@@ -156,6 +157,11 @@ p
     background-color: #cba97a;
     // color: #191a1c;
     color: #fff;
+}
+
+.btnPrimary:is(:hover, :focus, :active)
+{
+    background-color: #b6905b
 }
 
 .btnBig

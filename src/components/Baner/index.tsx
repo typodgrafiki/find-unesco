@@ -1,4 +1,4 @@
-import "@/app/styles/baner.scss"
+import "@/styles/baner.scss"
 
 const Baner = () => {
     return (

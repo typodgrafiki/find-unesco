@@ -1,9 +1,9 @@
-import { dropdownData } from "@/app/utils/dropdownData"
+import { dropdownData } from "@/utils/dropdownData"
 import Dropdown from "./Dropdown"
 import Logo from "./Logo"
 import Search from "./Search"
 import AddPlace from "./AddPlace"
-import "@/app/styles/navbar.scss"
+import "@/styles/navbar.scss"
 
 const Navbar = () => {
     return (

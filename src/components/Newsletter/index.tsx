@@ -1,4 +1,4 @@
-import "@/app/styles/newsletter.scss"
+import "@/styles/newsletter.scss"
 
 const Newsletter: React.FC = () => {
     return (

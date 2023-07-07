@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
 import Image from "next/image"
-import listPlaces from "@/app/utils/listPlacesUnesco.json"
-import img from "@/app/assets/images/search.svg"
+import listPlaces from "@/lib/listPlacesUnesco.json"
+import img from "@/assets/images/search.svg"
 
 const Search = () => {
     

@@ -1,6 +1,6 @@
-import dynamic from "next/dynamic"
-import Baner from "@/app/components/Home/Baner"
-import ProductList from "@/app/components/ProductList/ProductList"
+// import dynamic from "next/dynamic"
+import Baner from "@/components/Baner"
+import ProductList from "@/components/ProductList/ProductList"
 
 // const ProductListLoad = dynamic(
 //     () => import("@/app/components/ProductList/ProductList"),
