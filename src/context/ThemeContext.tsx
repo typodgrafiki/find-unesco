@@ -1,12 +1,42 @@
-"use client"
-import { useContext } from 'react';
+'use client'
+ 
+import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react'
+ 
+interface FormData {
+	locations: string[];
+	types: string[];
+}
 
-const ThemeContext = createContext(null);
+interface ThemeContextType {
+	openSearch: boolean
+	setOpenSearch: Dispatch<SetStateAction<boolean>>
+	formData: FormData
+	setFormData: Dispatch<SetStateAction<FormData>>
+}
 
-export const ThemeProvider = ({children})=> {
-	return(
-		<ThemeContext.Provider value={"mycontext2"}>
+const ThemeContext = createContext<ThemeContextType>({
+	openSearch: false,
+	setOpenSearch: () => {},
+	formData: {
+        locations: [],
+        types: [],
+    },
+	setFormData: () => {}
+})
+ 
+export const ThemeProvider = ({children}) => {
+	
+	const [openSearch, setOpenSearch] = useState(false) 
+	const [formData, setFormData] = useState<FormData>({
+		locations: [],
+		types: []
+	})
+	
+  	return  (
+		<ThemeContext.Provider value={{ openSearch, setOpenSearch, formData, setFormData }}>
 			{children}
-		</ThemeContext.Provider>
+		</ThemeContext.Provider>	
 	)
 }
+
+export const useGlobalContext = () => useContext(ThemeContext)

@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import Modal from "@/components/modals/Modal"
 import Newsletter from "@/components/Newsletter"
+import { ThemeProvider } from "@/context/ThemeContext";
 import "@/styles/global.scss"
 
 import { Poppins } from "next/font/google"
@@ -35,18 +36,20 @@ export const metadata = {
 }
 
 export default function RootLayout({
-    children,
+    children
 }: {
     children: React.ReactNode
 }) {
     return (
         <html lang="en">
             <body className={poppins.className}>
-                <Navbar />
-                <main>{children}</main>
-                <Newsletter />
-                <Footer />
-                <Modal />
+                <ThemeProvider>
+                    <Navbar />
+                    <main >{children}</main>
+                    <Newsletter />
+                    <Footer />
+                    <Modal />
+                </ThemeProvider>
             </body>
         </html>
     )
