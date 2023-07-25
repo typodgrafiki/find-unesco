@@ -1,8 +1,12 @@
 "use client"
+import { useGlobalContext } from "@/context/ThemeContext"
 
 const AddPlace = () => {
+    
+    const { showModal, setShowModal } = useGlobalContext()
+    
     const handlerAddPlace = () => {
-        console.log("open modal")
+        setShowModal(!showModal)
     }
 
     return (

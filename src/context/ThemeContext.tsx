@@ -11,7 +11,9 @@ interface ThemeContextType {
 	openSearch: boolean
 	setOpenSearch: Dispatch<SetStateAction<boolean>>
 	formData: FormData
-	setFormData: Dispatch<SetStateAction<FormData>>
+	setFormData: Dispatch<SetStateAction<FormData>>,
+	showModal: boolean
+	setShowModal: Dispatch<SetStateAction<boolean>>
 }
 
 const ThemeContext = createContext<ThemeContextType>({
@@ -21,19 +23,22 @@ const ThemeContext = createContext<ThemeContextType>({
         locations: [],
         types: [],
     },
-	setFormData: () => {}
+	setFormData: () => {},
+	showModal: false,
+	setShowModal: () => {}
 })
  
 export const ThemeProvider = ({children}) => {
 	
 	const [openSearch, setOpenSearch] = useState(false) 
+	const [showModal, setShowModal] = useState(false) 
 	const [formData, setFormData] = useState<FormData>({
 		locations: [],
 		types: []
 	})
 	
   	return  (
-		<ThemeContext.Provider value={{ openSearch, setOpenSearch, formData, setFormData }}>
+		<ThemeContext.Provider value={{ openSearch, setOpenSearch, formData, setFormData, showModal, setShowModal }}>
 			{children}
 		</ThemeContext.Provider>	
 	)
