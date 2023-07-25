@@ -1,7 +1,7 @@
 import data from "@/lib/listPlacesUnesco.json"
 import Image from "next/image"
 import ProductBox from "./ProductBox"
-import flag from "@/assets/images/flags/pl.svg"
+import flag from "public/flags/pl.svg"
 import "@/styles/productList.scss"
 
 interface ProductListProps {
