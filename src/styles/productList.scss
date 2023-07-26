@@ -89,6 +89,27 @@
         }
     }
     
+    .star  
+    {
+        position: absolute;
+        top: 13px;
+        right: 13px;
+        
+        svg
+        {
+            stroke: #ffffff;
+            fill: transparent;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+        
+        &.active svg, &:hover svg
+        {
+            stroke: #CBA97A;
+            fill: #CBA97A;
+        }
+    }
+    
 }
 
 .title img

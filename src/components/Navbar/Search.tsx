@@ -2,20 +2,18 @@
 
 import { useEffect, useRef } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
 import img from "@/assets/images/search.svg"
 import { countriesEurope as listEurope, listTypes, listPlacesEurope, listCountriesEurope } from "@/utils/filteredPlaces"
 
 const Search = () => {
     
-    console.log(listPlacesEurope)
-    console.log(listCountriesEurope)
-    
-    const countriesEurope = listEurope();
-    
+    const router = useRouter()
     const formRef = useRef<HTMLFormElement | null>(null)
     const { openSearch, setOpenSearch, formData, setFormData } = useGlobalContext()
     
+    // przechwytuje zdarzenie klikniecia w zamkniecie dropdown
     const handleEsc = (event: KeyboardEvent) => {
         if (
             event.key === "Escape" ||
@@ -25,6 +23,7 @@ const Search = () => {
         }
     }
     
+    // zbieram dane do state po kliknieciu w labele
     function handlePlacesChange(event: MouseEvent | KeyboardEvent) {
         const { name: typesName, value, checked } = event.target
 
@@ -49,6 +48,51 @@ const Search = () => {
         })
     }
     
+    // przechwytywanie wysylania formularza serch
+    const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
+        event.preventDefault()
+        // console.log("Kraje:", formData.locations.toString())
+        // console.log("Typy:", formData.types.toString())
+
+        const url = () => {
+            const returnLocations: string | null = (() => {
+                if (formData.locations[0]) {
+                    const location = formData.locations.toString()
+                    return `locations=${location}`
+                } else {
+                    return ""
+                }
+            })()
+
+            const returnTypes: string | null = (() => {
+                if (formData.types[0]) {
+                    const type = formData.types.toString()
+                    return `types=${type}`
+                } else {
+                    return ""
+                }
+            })()
+
+            const result: string = (() => {
+                const both: string | null = (() => {
+                    return returnLocations && returnTypes ? "&" : ""
+                })()
+
+                return `/search?${returnLocations}${both}${returnTypes}`
+            })()
+
+            return result
+        }
+
+        router.push(url())
+
+        setOpenSearch(false)
+        setFormData({
+            locations: [],
+            types: [],
+        })
+    }
+    
     useEffect(() => {
 
         document.addEventListener("keydown", handleEsc)
@@ -65,6 +109,7 @@ const Search = () => {
         <form
             className="searchForm flex"
             ref={formRef}
+            onSubmit={handleSubmit}
         >            
             <div 
                 className={
@@ -89,22 +134,28 @@ const Search = () => {
                     <div className="dropdownMenu show">
                         <div className="rowCountries">
                             <h3>Europe</h3>
-                            <ul>
+                            <ul className="flagList textLeft">
                                 {listCountriesEurope.map((element) => (
                                     <li key={element.iso_code}>
                                         <input
-                                            id={element.iso_code}
+                                            id={element.states_name_en[0]}
                                             type="checkbox"
                                             name="locations"
-                                            value={element.iso_code}
+                                            value={element.states_name_en[0]}
                                             onChange={handlePlacesChange}
                                             hidden
                                         />
                                         <label
                                             className="btn"
-                                            htmlFor={element.iso_code}
+                                            htmlFor={element.states_name_en[0]}
                                         >
-                                            <img src={`flags/${element.iso_code}.svg`} />
+                                            <Image 
+                                                className="radius"
+                                                src={`flags/${element.iso_code}.svg`} 
+                                                height={21}
+                                                width={21}
+                                                alt={element.states_name_en[0]}
+                                            />
                                             <span>{element.states_name_en[0]}</span>
                                         </label>
                                     </li>
@@ -125,6 +176,12 @@ const Search = () => {
                                             className="btn"
                                             htmlFor={element}
                                         >
+                                            <Image 
+                                                src={`types/${element.toLowerCase()}.svg`} 
+                                                width={29}
+                                                height={31}
+                                                alt={element}
+                                            />
                                             {element}
                                         </label>  
                                     </li>
@@ -135,7 +192,7 @@ const Search = () => {
                                     type="submit"
                                     className="btn btnPrimary"
                                 >
-                                    Szukaj
+                                    Search
                                 </button>
                             </div>
                         </div>

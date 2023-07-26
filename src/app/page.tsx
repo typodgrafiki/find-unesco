@@ -15,10 +15,20 @@ const Homepage = () => {
             <Baner />
             <div className="container">
                 <ProductList 
-                    country="Poland"
+                    country="Poland" 
+                    iso="pl"
                 />
                 <ProductList 
-                    country="Slovenia"
+                    country="Italy" 
+                    iso="it"
+                />
+                <ProductList 
+                    country="Norway" 
+                    iso="no"
+                />
+                <ProductList 
+                    country="Switzerland" 
+                    iso="ch"
                 />
             </div>
         </>

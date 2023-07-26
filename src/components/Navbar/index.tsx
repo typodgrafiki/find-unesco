@@ -7,7 +7,7 @@ import "@/styles/navbar.scss"
 
 const Navbar = () => {
     return (
-        <div className="navbar">
+        <div className="navbar shadowNavbar">
             <Logo />
             <Search />
             <div className="buttons">

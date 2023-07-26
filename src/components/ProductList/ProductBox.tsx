@@ -11,7 +11,7 @@ const ProductBox: React.FC<IUnescoObjestProps> = ({
     return (
         <>
             <div className="productBox">
-                <div className="image">
+                <div className="image relative">
                     {image ? (
                         <Image
                             src={image}
@@ -24,7 +24,9 @@ const ProductBox: React.FC<IUnescoObjestProps> = ({
                             Brak obrazka
                         </div>
                     )}
-                    
+                    <div className="star">
+                        <svg width="21" height="19" viewBox="0 0 21 19" xmlns="http://www.w3.org/2000/svg"><path d="M9.70616 2.90351L10.5 3.93976L11.2938 2.90351C12.2026 1.71724 13.6071 1 15.1375 1C17.8091 1 20 3.19645 20 5.91416C20 7.26965 19.4639 8.52627 18.5098 9.45239L18.5019 9.46004L18.4941 9.46787L10.5 17.5762L2.35374 9.31519C1.47956 8.39335 1 7.18776 1 5.91416C1 3.19645 3.19086 1 5.8625 1C7.39285 1 8.7974 1.71724 9.70616 2.90351Z" strokeWidth="2"/></svg>
+                    </div>
                 </div>
                 <div className="caption">
                     <div className="name-container flex flexJustifyBetween">
