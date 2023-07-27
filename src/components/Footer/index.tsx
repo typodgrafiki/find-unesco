@@ -4,7 +4,7 @@ const Footer = () => {
     
     return (
         <>
-            <footer className="footer">
+            <footer className="footer relative">
                 <div className="container flex flexJustifyBetween flexAlignCenter">
                     <ul>
                         <li>

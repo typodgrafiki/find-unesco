@@ -3,7 +3,7 @@ import "@/styles/newsletter.scss"
 const Newsletter: React.FC = () => {
     return (
         <>
-            <section className="newsletter">
+            <section className="newsletter relative">
                 <div className="container">
                     <h4>Newsletter</h4>
                     <p>

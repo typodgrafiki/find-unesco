@@ -10,8 +10,6 @@ interface ProductListProps {
 
 const ProductList: FC.React<ProductListProps> = ({ country, iso }) => {
     
-    console.log(country)
-    
     const countryLowerCase: string = country.toLowerCase()
     const countryArray: string[] = country.split(',')
 
@@ -42,7 +40,7 @@ const ProductList: FC.React<ProductListProps> = ({ country, iso }) => {
         
         
     return (
-        <>
+        <div>
             <div className="titleRow flex flexJustifyBetween flexAlignCenter">
                 <h2 className="title">
                     {iso && (
@@ -73,7 +71,7 @@ const ProductList: FC.React<ProductListProps> = ({ country, iso }) => {
                     />
                 ))}
             </div>
-        </>
+        </div>
     )
 }
 

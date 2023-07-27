@@ -1,12 +1,11 @@
-.productList
+.title img
 {
-    --grid_column: 4;
-    display: grid;
-    grid-template-columns: repeat(var(--grid_column),1fr);
-    gap: 40px 30px;
-    grid-auto-flow: dense;
-    margin-bottom: 30px;
-    
+    margin-right: 10px;   
+    border-radius: 50%;
+}
+
+.productBox
+{
     .image 
     {
         background-color: #fff;
@@ -54,10 +53,6 @@
     
     .description
     {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
         color: #8F9495;
     }
     
@@ -109,11 +104,62 @@
             fill: #CBA97A;
         }
     }
-    
 }
 
-.title img
+.productList
 {
-    margin-right: 10px;   
-    border-radius: 50%;
+    --grid_column: 4;
+    display: grid;
+    grid-template-columns: repeat(var(--grid_column),1fr);
+    gap: 40px 30px;
+    grid-auto-flow: dense;
+    margin-bottom: 30px;
+    
+    .description
+    {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+}
+
+.searchList .productBox
+{
+    display: flex;
+    margin-bottom: 20px;
+    
+    .image 
+    {
+        width: 25%;
+    }
+    
+    .caption 
+    {
+        width: 75%;
+        padding-left: 20px;
+    }
+}
+
+.mapContainer
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 30px;
+    
+    .titleRow
+    {
+        grid-column: span 2;
+    }
+    
+    #map
+    {
+        background-color: #d5d5d5;
+        border-radius: 20px;
+        position: fixed;
+        left: calc(50% + 20px);
+        right: 10px;
+        bottom: 10px;
+        top: 90px;
+    }
 }

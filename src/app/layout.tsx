@@ -46,8 +46,10 @@ export default function RootLayout({
                 <ThemeProvider>
                     <Navbar />
                     <main >{children}</main>
-                    <Newsletter />
-                    <Footer />
+                    <div id="footer">
+                        <Newsletter />
+                        <Footer />
+                    </div>
                     <Modal />
                 </ThemeProvider>
             </body>

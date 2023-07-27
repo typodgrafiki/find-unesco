@@ -15,7 +15,7 @@ const countries = [...new Set(listPlaces.map(item => item.states_name_en))];
 
 const Search = () => {
     
-    console.log(categories)
+    //console.log(categories)
     
     
     const formRef = useRef<HTMLFormElement | null>(null)
