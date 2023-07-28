@@ -1,7 +1,3 @@
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
-import Modal from "@/components/modals/Modal"
-import Newsletter from "@/components/Newsletter"
 import { ThemeProvider } from "@/context/ThemeContext";
 import "@/styles/global.scss"
 
@@ -44,15 +40,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={poppins.className}>
                 <ThemeProvider>
-                    <div className="wrapper">
-                        <Navbar />
-                        <main>{children}</main>
-                        <div id="footer">
-                            <Newsletter />
-                            <Footer />
-                        </div>
-                        <Modal />
-                    </div>
+                    {children}
                 </ThemeProvider>
             </body>
         </html>
