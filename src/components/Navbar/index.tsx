@@ -11,7 +11,7 @@ const Navbar = () => {
             <Logo />
             <Search />
             <div className="buttons">
-                <AddPlace />
+                {/* <AddPlace /> */}
                 {dropdownData.map((item) => (
                     <Dropdown
                         label={item.label}

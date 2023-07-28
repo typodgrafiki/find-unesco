@@ -6,6 +6,11 @@
     --primary: #cba97a;
 }
 
+* 
+{
+    box-sizing: border-box;
+}
+
 .transition
 {
     transition: all .3s ease;       
@@ -32,6 +37,11 @@ body
     font-weight: 300;
 }
 
+html, body 
+{
+    height: 100%;
+}
+
 a
 {
     color: inherit;
@@ -52,16 +62,25 @@ p
     position: relative;
 }
 
-.searchLayout
-{
-    padding-top: 88px;
-}
-
 .container 
 {
     margin: 0 auto;
-    max-width: 1310px;
+    // max-width: 1310px;
     padding: 0 3%;
+}
+
+.wrapper 
+{
+    
+    padding-top: 87px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main 
+{
+    flex-grow: 1;
 }
 
 .nowrap 
@@ -96,6 +115,11 @@ p
 .textRight
 {
     text-align: right;
+}
+
+.block 
+{
+    display: block;
 }
 
 .flex 

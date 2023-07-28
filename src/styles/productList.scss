@@ -150,6 +150,14 @@
     .titleRow
     {
         grid-column: span 2;
+        
+        small 
+        {
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 140%;
+            margin-top: 4px;
+        }
     }
     
     #map

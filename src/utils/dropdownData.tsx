@@ -30,23 +30,23 @@ const dropdownData: DropdownData = [
         ],
         lang: true,
     },
-    {
-        label: "Login",
-        options: [
-            {
-                label: "Login",
-                url: "/login",
-            },
-            {
-                label: "Sign in",
-                url: "/sign-in",
-            },
-            {
-                label: "Logout",
-                url: "/logout",
-            },
-        ],
-    },
+    // {
+    //     label: "Login",
+    //     options: [
+    //         {
+    //             label: "Login",
+    //             url: "/dashboard/login",
+    //         },
+    //         {
+    //             label: "Sign in",
+    //             url: "/dashboard/sign-in",
+    //         },
+    //         {
+    //             label: "Logout",
+    //             url: "/dashboard/logout",
+    //         },
+    //     ],
+    // },
 ]
 
 export { IDropdownProps, IDropdownLiProps, dropdownData }

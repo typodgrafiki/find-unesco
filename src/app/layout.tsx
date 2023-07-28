@@ -44,13 +44,15 @@ export default function RootLayout({
         <html lang="en">
             <body className={poppins.className}>
                 <ThemeProvider>
-                    <Navbar />
-                    <main >{children}</main>
-                    <div id="footer">
-                        <Newsletter />
-                        <Footer />
+                    <div className="wrapper">
+                        <Navbar />
+                        <main>{children}</main>
+                        <div id="footer">
+                            <Newsletter />
+                            <Footer />
+                        </div>
+                        <Modal />
                     </div>
-                    <Modal />
                 </ThemeProvider>
             </body>
         </html>

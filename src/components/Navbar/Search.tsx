@@ -53,6 +53,8 @@ const Search = () => {
         event.preventDefault()
         // console.log("Kraje:", formData.locations.toString())
         // console.log("Typy:", formData.types.toString())
+        
+        
 
         const url = () => {
             const returnLocations: string | null = (() => {
@@ -84,13 +86,18 @@ const Search = () => {
             return result
         }
 
-        router.push(url())
+        if(formData.locations.length > 0) {
+            router.push(url())
 
-        setOpenSearch(false)
-        setFormData({
-            locations: [],
-            types: [],
-        })
+            setOpenSearch(false)
+            setFormData({
+                locations: [],
+                types: [],
+            })    
+        }else{
+            alert('Choose some country')
+        }
+        
     }
     
     useEffect(() => {
@@ -151,7 +158,7 @@ const Search = () => {
                                         >
                                             <Image 
                                                 className="radius"
-                                                src={`flags/${element.iso_code}.svg`} 
+                                                src={`/flags/${element.iso_code}.svg`} 
                                                 height={21}
                                                 width={21}
                                                 alt={element.states_name_en[0]}
@@ -177,7 +184,7 @@ const Search = () => {
                                             htmlFor={element}
                                         >
                                             <Image 
-                                                src={`types/${element.toLowerCase()}.svg`} 
+                                                src={`/types/${element.toLowerCase()}.svg`} 
                                                 width={29}
                                                 height={31}
                                                 alt={element}

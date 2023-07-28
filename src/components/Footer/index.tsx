@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import "@/styles/footer.scss"
 
 const Footer = () => {
@@ -8,13 +9,14 @@ const Footer = () => {
                 <div className="container flex flexJustifyBetween flexAlignCenter">
                     <ul>
                         <li>
-                            <a href="/" className="transition">About project</a>
+                            <Link href="/about" className="transition">About project</Link>
+                            
                         </li>
                         <li>
-                            <a href="/" className="transition">Contact</a>
+                            <Link href="/contact" className="transition">Contact</Link>
                         </li>
                         <li>
-                            <a href="/" className="transition">Buy coffee</a>
+                            <Link href="/buy-coffee" className="transition">Buy coffee</Link>
                         </li>
                     </ul>
                     <ul className="social">
