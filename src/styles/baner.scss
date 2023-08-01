@@ -32,5 +32,9 @@
         font-weight: 400;
         margin: 0 0 20px;
     }
+}
 
+.wrapper:has(.baner)
+{
+    padding-top: 0;
 }

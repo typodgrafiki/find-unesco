@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={poppins.className}>
+            <body className={poppins.className} data-en="qwdwqd">
                 <ThemeProvider>
                     {children}
                 </ThemeProvider>

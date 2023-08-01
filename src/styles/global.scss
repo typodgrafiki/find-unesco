@@ -212,6 +212,17 @@ main
     @extend .transition;
 }
 
+.contentText
+{
+    line-height: 160%;
+    max-width: 1300px;
+}
+
+.contentText p 
+{
+    margin-bottom: 15px;
+}
+
 .dropdown 
 {
     position: relative;
