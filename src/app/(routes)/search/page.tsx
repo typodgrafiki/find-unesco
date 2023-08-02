@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from "next/navigation"
 import ProductList from "@/components/ProductList/ProductList"
+import Map from '@/components/Map/Map'
 
 const SearchPage = () => {
     const searchParams = useSearchParams()
@@ -35,9 +36,7 @@ const SearchPage = () => {
                     country={country} 
                     types={types} 
                 />
-                <div id="map" style={{ bottom: `${footerVisible}px`}}>    
-
-                </div>
+                <Map />
             </div>
         </>
     )

@@ -12,41 +12,41 @@ interface IDropdownProps {
 type DropdownData = IDropdownProps[]
 
 const dropdownData: DropdownData = [
-    {
-        label: "Language",
-        options: [
-            {
-                label: "English",
-                url: "wefwe",
-            },
-            {
-                label: "German",
-                url: "gre",
-            },
-            {
-                label: "Polish",
-                url: "gr",
-            },
-        ],
-        lang: true,
-    },
     // {
-    //     label: "Login",
+    //     label: "Language",
     //     options: [
     //         {
-    //             label: "Login",
-    //             url: "/dashboard/login",
+    //             label: "English",
+    //             url: "wefwe",
     //         },
     //         {
-    //             label: "Sign in",
-    //             url: "/dashboard/sign-in",
+    //             label: "German",
+    //             url: "gre",
     //         },
     //         {
-    //             label: "Logout",
-    //             url: "/dashboard/logout",
+    //             label: "Polish",
+    //             url: "gr",
     //         },
     //     ],
+    //     lang: true,
     // },
+    {
+        label: "Login",
+        options: [
+            {
+                label: "Login",
+                url: "/auth/login",
+            },
+            {
+                label: "Sign in",
+                url: "/auth/sign-in",
+            },
+            {
+                label: "Logout",
+                url: "/auth/logout",
+            },
+        ],
+    },
 ]
 
 export { IDropdownProps, IDropdownLiProps, dropdownData }

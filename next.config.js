@@ -8,27 +8,27 @@ const nextConfig = {
     images: {
         domains: ["res.cloudinary.com"],
     },
-    i18n: {
-        locales: ['en-US', 'pl', 'de'],
-        defaultLocale: 'en-US',
-        domains: [
-          {
-            domain: 'findunesco.com',
-            defaultLocale: 'en-US',
-            http: true,
-          },
-          {
-            domain: 'findunesco.pl',
-            defaultLocale: 'pl',
-            http: true,
-          },
-          {
-            domain: 'findunesco.de',
-            defaultLocale: 'de',
-            http: true,
-          },
-        ],
-    },
+    // i18n: {
+    //     locales: ['en-US', 'pl', 'de'],
+    //     defaultLocale: 'en-US',
+    //     domains: [
+    //       {
+    //         domain: 'findunesco.com',
+    //         defaultLocale: 'en-US',
+    //         http: true,
+    //       },
+    //       {
+    //         domain: 'findunesco.pl',
+    //         defaultLocale: 'pl',
+    //         http: true,
+    //       },
+    //       {
+    //         domain: 'findunesco.de',
+    //         defaultLocale: 'de',
+    //         http: true,
+    //       },
+    //     ],
+    // },
 }
 
 module.exports = nextConfig
