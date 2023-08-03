@@ -45,6 +45,7 @@ const ProductList: FC.React<ProductListProps> = ({ country, iso, types }) => {
     }
     
     const elements = countryElementsFn() 
+    const numberElements = elements.length
         
     return (
         <div>
@@ -67,7 +68,11 @@ const ProductList: FC.React<ProductListProps> = ({ country, iso, types }) => {
                     </a>    
                 )}
             </div>
-            
+            {!iso && (
+                <div>
+                    Liczba wyników: {numberElements}
+                </div>    
+            )}
             {elements.length ? (
                 <div className={iso ? 'productList' : 'searchList'}>
                     {elements.map((element, index) => (
