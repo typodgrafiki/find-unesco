@@ -36,7 +36,10 @@ const SearchPage = () => {
                     country={country} 
                     types={types} 
                 />
-                <Map />
+                <Map 
+                    country={country} 
+                    types={types}  
+                />
             </div>
         </>
     )

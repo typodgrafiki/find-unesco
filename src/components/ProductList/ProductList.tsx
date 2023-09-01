@@ -2,6 +2,7 @@ import data from "@/lib/listPlacesUnesco.json"
 import Image from "next/image"
 import ProductBox from "./ProductBox"
 import "@/styles/productList.scss"
+import { listItems, toArray } from "@/utils/filteredPlaces"
 
 interface ProductListProps {
     country: string
@@ -13,28 +14,15 @@ const ProductList: FC.React<ProductListProps> = ({ country, iso, types }) => {
     
     // const countryLowerCase: string = country?.toLowerCase() || ''
     
-    const countryArray: string[] = country?.split(',') || []
+    const countryArray: string[] = toArray(country)
     const countryTitle: string = countryArray.join(', ')
-    const typesArray: string[] = types?.split(',') || []
+    const typesArray: string[] = toArray(types)
     const typesTitle: string = typesArray.join(', ')
 
     const countryElementsFn = () => {
         
-        const filteredElements = data.filter((element) => {
-            const isInCountryArray = countryArray.some((country) =>
-                element.states_name_en.includes(country)
-            )
-      
-            const isInTypesArray = typesArray.some((type) =>
-                element.category.includes(type)
-            )
-      
-            if (typesArray.length > 0) {
-                return isInCountryArray && isInTypesArray    
-            } else {
-                return isInCountryArray
-            }
-        })
+        const filteredElements = listItems(country, types)
+        
         
         if (iso) {
             const randomElements = filteredElements.sort(() => 0.5 - Math.random()).slice(0, 8)

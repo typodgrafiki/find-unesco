@@ -15,13 +15,10 @@ const Modal = () => {
     }
     
     useEffect(() => {
-
         document.addEventListener("keydown", handleEsc)
-
         return () => {
             document.removeEventListener("keydown", handleEsc)
         }
-        
     }, [])
     
     return (

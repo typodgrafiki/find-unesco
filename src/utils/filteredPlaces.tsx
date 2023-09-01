@@ -1,6 +1,12 @@
 import listPlaces from "@/lib/listPlacesUnesco.json"
 
 
+
+export const toArray = (element) => {
+    return element?.split(',') || []
+}
+
+
 export const listPlacesEurope = listPlaces.filter(item => {
     return item.region_en.includes("Europe");
 })
@@ -71,7 +77,35 @@ export const isoList = listPlaces.reduce((acc, item) => {
 }, {});
   
 
-  
+
+
+export const listItems = (country, types) => {
+    
+    
+    
+    const countryArray: string[] = toArray(country)
+    const typesArray: string[] = toArray(types)
+    
+    const result = listPlaces.filter((element) => {
+        const isInCountryArray = countryArray.some((country) =>
+            element.states_name_en.includes(country)
+        )
+    
+        const isInTypesArray = typesArray.some((type) =>
+            element.category.includes(type)
+        )
+    
+        if (typesArray.length > 0) {
+            return isInCountryArray && isInTypesArray    
+        } else {
+            return isInCountryArray
+        }
+    })
+    
+    
+    return result
+}
+
   
 
 export const listTypes = [...new Set(listPlaces.map(item => item.category))];
