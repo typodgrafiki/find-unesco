@@ -29,19 +29,30 @@ const ThemeContext = createContext<ThemeContextType>({
 })
  
 export const ThemeProvider = ({children}) => {
-	
-	const [openSearch, setOpenSearch] = useState(false) 
-	const [showModal, setShowModal] = useState(false) 
-	const [formData, setFormData] = useState<FormData>({
-		locations: [],
-		types: []
-	})
-	
-  	return  (
-		<ThemeContext.Provider value={{ openSearch, setOpenSearch, formData, setFormData, showModal, setShowModal }}>
-			{children}
-		</ThemeContext.Provider>	
-	)
+    const [searchQuery, setSearchQuery] = useState([])
+    const [openSearch, setOpenSearch] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [formData, setFormData] = useState<FormData>({
+        locations: [],
+        types: [],
+    })
+
+    return (
+        <ThemeContext.Provider
+            value={{
+                openSearch,
+                setOpenSearch,
+                formData,
+                setFormData,
+                showModal,
+                setShowModal,
+                searchQuery,
+                setSearchQuery,
+            }}
+        >
+            {children}
+        </ThemeContext.Provider>
+    )
 }
 
 export const useGlobalContext = () => useContext(ThemeContext)

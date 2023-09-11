@@ -5,14 +5,20 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
 import img from "@/assets/images/search.svg"
-import { countriesEurope as listEurope, listTypes, listPlacesEurope, listCountriesEurope } from "@/utils/filteredPlaces"
+import { listItems } from "@/utils/filteredPlaces"
+import {
+    countriesEurope as listEurope,
+    listTypes,
+    listPlacesEurope,
+    listCountriesEurope,
+} from "@/utils/filteredPlaces"
 
 const Search = () => {
-    
     const router = useRouter()
     const formRef = useRef<HTMLFormElement | null>(null)
-    const { openSearch, setOpenSearch, formData, setFormData } = useGlobalContext()
-    
+    const { openSearch, setOpenSearch, formData, setFormData } =
+        useGlobalContext()
+
     // przechwytuje zdarzenie klikniecia w zamkniecie dropdown
     const handleEsc = (event: KeyboardEvent) => {
         if (
@@ -22,7 +28,7 @@ const Search = () => {
             setOpenSearch(false)
         }
     }
-    
+
     // zbieram dane do state po kliknieciu w labele
     function handlePlacesChange(event: MouseEvent | KeyboardEvent) {
         const { name: typesName, value, checked } = event.target
@@ -43,18 +49,24 @@ const Search = () => {
                     ),
                 }
             }
-            
+
             return formData
         })
     }
-    
+
+    const openSearchHandler = () => {
+        setFormData({
+            locations: [],
+            types: [],
+        })
+        setOpenSearch(true)
+    }
+
     // przechwytywanie wysylania formularza serch
     const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
         event.preventDefault()
-        // console.log("Kraje:", formData.locations.toString())
-        // console.log("Typy:", formData.types.toString())
-        
-        
+        // console.log("Kraje:", formData)
+        // console.log("Typy:", formData)
 
         const url = () => {
             const returnLocations: string | null = (() => {
@@ -86,21 +98,17 @@ const Search = () => {
             return result
         }
 
-        if(formData.locations.length > 0) {
+        if (formData.locations.length > 0) {
             router.push(url())
 
             setOpenSearch(false)
-            setFormData({
-                locations: [],
-                types: [],
-            })    
-        }else{
-            alert('Choose some country')
+        } else {
+            alert("Choose some country")
         }
-        
     }
-    
+
     useEffect(() => {
+        console.log("test")
 
         document.addEventListener("keydown", handleEsc)
         document.addEventListener("mousedown", handleEsc)
@@ -109,24 +117,22 @@ const Search = () => {
             document.removeEventListener("mousedown", handleEsc)
             document.removeEventListener("keydown", handleEsc)
         }
-        
     }, [])
-    
+
     return (
         <form
             className="searchForm flex"
             ref={formRef}
             onSubmit={handleSubmit}
-        >            
-            <div 
-                className={
-                    openSearch ? "formControl blocked" : "formControl"
-                }
-                onClick={() => setOpenSearch(true)}
+        >
+            <div
+                className={openSearch ? "formControl blocked" : "formControl"}
+                // onClick={() => setOpenSearch(true)}
+                onClick={openSearchHandler}
             >
                 {formData.locations[0]
-                        ? formData.locations.map((element) => element + ", ")
-                        : "Search for a place..."}   
+                    ? formData.locations.map((element) => element + ", ")
+                    : "Search for a place..."}
             </div>
             <button className="btn btnIcon btnDark">
                 <Image
@@ -156,14 +162,16 @@ const Search = () => {
                                             className="btn"
                                             htmlFor={element.states_name_en[0]}
                                         >
-                                            <Image 
+                                            <Image
                                                 className="radius"
-                                                src={`/flags/${element.iso_code}.svg`} 
+                                                src={`/flags/${element.iso_code}.svg`}
                                                 height={21}
                                                 width={21}
                                                 alt={element.states_name_en[0]}
                                             />
-                                            <span>{element.states_name_en[0]}</span>
+                                            <span>
+                                                {element.states_name_en[0]}
+                                            </span>
                                         </label>
                                     </li>
                                 ))}
@@ -183,14 +191,14 @@ const Search = () => {
                                             className="btn"
                                             htmlFor={element}
                                         >
-                                            <Image 
-                                                src={`/types/${element.toLowerCase()}.svg`} 
+                                            <Image
+                                                src={`/types/${element.toLowerCase()}.svg`}
                                                 width={29}
                                                 height={31}
                                                 alt={element}
                                             />
                                             {element}
-                                        </label>  
+                                        </label>
                                     </li>
                                 ))}
                             </ul>
