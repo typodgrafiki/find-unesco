@@ -38,6 +38,11 @@ const SearchPage = () => {
     return (
         <>
             {formData.locations.map((el) => el)}
+            <br />
+            {formData.types.map((el) => el)}
+            <br />
+            {/* {formData.result} */}
+            <br />
             <div className="container mapContainer">
                 <ProductList
                     country={country}

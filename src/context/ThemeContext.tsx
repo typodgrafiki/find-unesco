@@ -3,32 +3,50 @@
 import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react'
  
 interface FormData {
-	locations: string[];
-	types: string[];
+    locations: string[]
+    types: string[]
+}
+
+interface FormResults {
+    name_en: string
+    short_description_en: string
+    longitude: number
+    latitude: number
+    category: string
+    states_name_en: string[]
+    region_en: string
+    iso_code: string
+    udnp_code: string
+    image: string
+    link: string
 }
 
 interface ThemeContextType {
-	openSearch: boolean
-	setOpenSearch: Dispatch<SetStateAction<boolean>>
-	formData: FormData
-	setFormData: Dispatch<SetStateAction<FormData>>,
-	showModal: boolean
-	setShowModal: Dispatch<SetStateAction<boolean>>
+    openSearch: boolean
+    setOpenSearch: Dispatch<SetStateAction<boolean>>
+    formData: FormData
+    setFormData: Dispatch<SetStateAction<FormData>>
+    formResults: FormResults
+    setFormResults: Dispatch<SetStateAction<FormResults>>
+    showModal: boolean
+    setShowModal: Dispatch<SetStateAction<boolean>>
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-	openSearch: false,
-	setOpenSearch: () => {},
-	formData: {
+    openSearch: false,
+    setOpenSearch: () => {},
+    formData: {
         locations: [],
         types: [],
     },
-	setFormData: () => {},
-	showModal: false,
-	setShowModal: () => {}
+    setFormData: () => {},
+    formResults: [],
+    setFormResults: () => {},
+    showModal: false,
+    setShowModal: () => {},
 })
- 
-export const ThemeProvider = ({children}) => {
+
+export const ThemeProvider = ({ children }) => {
     const [searchQuery, setSearchQuery] = useState([])
     const [openSearch, setOpenSearch] = useState(false)
     const [showModal, setShowModal] = useState(false)
@@ -36,6 +54,7 @@ export const ThemeProvider = ({children}) => {
         locations: [],
         types: [],
     })
+    const [formResults, setFormResults] = useState<FormResults>([])
 
     return (
         <ThemeContext.Provider
@@ -48,6 +67,8 @@ export const ThemeProvider = ({children}) => {
                 setShowModal,
                 searchQuery,
                 setSearchQuery,
+                formResults,
+                setFormResults,
             }}
         >
             {children}

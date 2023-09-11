@@ -19,7 +19,7 @@ const Map = ({ country, types }) => {
     const [lng, setLng] = useState(3.82)
     const [lat, setLat] = useState(47.31)
     const [zoom, setZoom] = useState(3.82)
-    const { formData } = useGlobalContext()
+    const { formData, formResults } = useGlobalContext()
 
     function mapChange(elements) {
         if (elements.length) {
@@ -113,9 +113,6 @@ const Map = ({ country, types }) => {
         // const filteredElements2 = listItems(country, types)
 
         const filteredElements2 = (country, types) => {
-            console.log(country)
-            console.log(types)
-
             const result = listPlaces.filter((element) => {
                 const isInCountryArray = country.some((countryEl) =>
                     element.states_name_en.includes(countryEl)
@@ -138,7 +135,7 @@ const Map = ({ country, types }) => {
         const result = filteredElements2(formData.locations, formData.types)
 
         mapChange(result)
-    }, [formData])
+    }, [formResults])
 
     return (
         <>

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
 import img from "@/assets/images/search.svg"
 import { listItems } from "@/utils/filteredPlaces"
+import listPlaces from "@/lib/listPlacesUnesco.json"
 import {
     countriesEurope as listEurope,
     listTypes,
@@ -16,8 +17,14 @@ import {
 const Search = () => {
     const router = useRouter()
     const formRef = useRef<HTMLFormElement | null>(null)
-    const { openSearch, setOpenSearch, formData, setFormData } =
-        useGlobalContext()
+    const {
+        openSearch,
+        setOpenSearch,
+        formData,
+        setFormData,
+        formResults,
+        setFormResults,
+    } = useGlobalContext()
 
     // przechwytuje zdarzenie klikniecia w zamkniecie dropdown
     const handleEsc = (event: KeyboardEvent) => {
@@ -65,8 +72,10 @@ const Search = () => {
     // przechwytywanie wysylania formularza serch
     const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
         event.preventDefault()
-        // console.log("Kraje:", formData)
-        // console.log("Typy:", formData)
+
+        console.log("Kraje:", formData.locations)
+        console.log("Typy:", formData.types)
+        // console.log(formResults.results)
 
         const url = () => {
             const returnLocations: string | null = (() => {
@@ -101,6 +110,33 @@ const Search = () => {
         if (formData.locations.length > 0) {
             router.push(url())
 
+            const filteredElements3 = (country, types) => {
+                const result = listPlaces.filter((element) => {
+                    const isInCountryArray = country.some((countryEl) =>
+                        element.states_name_en.includes(countryEl)
+                    )
+
+                    const isInTypesArray = types.some((typeEl) =>
+                        element.category.includes(typeEl)
+                    )
+
+                    if (types.length > 0) {
+                        return isInCountryArray && isInTypesArray
+                    } else {
+                        return isInCountryArray
+                    }
+                })
+
+                return result
+            }
+
+            const result2 = filteredElements3(
+                formData.locations,
+                formData.types
+            )
+
+            setFormResults(result2)
+
             setOpenSearch(false)
         } else {
             alert("Choose some country")
@@ -108,8 +144,6 @@ const Search = () => {
     }
 
     useEffect(() => {
-        console.log("test")
-
         document.addEventListener("keydown", handleEsc)
         document.addEventListener("mousedown", handleEsc)
 
