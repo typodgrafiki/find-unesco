@@ -1,5 +1,6 @@
 "use client"
 import { useRef, useEffect, useState } from 'react'
+import { useSearchParams } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
 import mapboxgl from "!mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
@@ -9,7 +10,11 @@ import listPlaces from "@/lib/listPlacesUnesco.json"
 mapboxgl.accessToken =
     "pk.eyJ1IjoiZ2swMDciLCJhIjoiY2xrbDcwaXF6MThmMjNka2d6bTN5NDdkOCJ9.8RDUIT-Twn5-a_UEwCjsaw"
 
-const Map = ({ country, types }) => {
+const Map = () => {
+    const searchParams = useSearchParams()
+    const types = searchParams.get("types")
+    const country = searchParams.get("locations")
+    
     const [footerVisible, setFooterVisible] = useState(0)
 
     const filteredElements = listItems(country, types)
@@ -19,10 +24,26 @@ const Map = ({ country, types }) => {
     const [lng, setLng] = useState(3.82)
     const [lat, setLat] = useState(47.31)
     const [zoom, setZoom] = useState(3.82)
-    const { formData, formResults } = useGlobalContext()
+    const { formData, formResults, setFormResults, selectItemIndex } = useGlobalContext()
+    
+    const typesInArray = types && types.split(',') || []
+    const locationsInArray = country && country.split(',') || []
+    
+    function removeAllMarkers() {
+
+        const markers = document.querySelectorAll('.mapboxgl-marker')
+      
+        markers.forEach(marker => {
+          marker.remove()
+        })
+    }
 
     function mapChange(elements) {
+        
+        removeAllMarkers()
+        
         if (elements.length) {
+            
             const allMarkersPosition = elements.map((obj) => [
                 obj.longitude,
                 obj.latitude,
@@ -34,16 +55,75 @@ const Map = ({ country, types }) => {
             })
 
             map.current.fitBounds(bounds, {
-                maxZoom: 14,
-                padding: 30,
+                maxZoom: 9,
+                padding: 80,
             })
-
-            for (const element of elements) {
-                const marker = new mapboxgl.Marker()
+            
+            elements.forEach((element, index) => {
+                const myMarker = document.createElement('img')
+                myMarker.className = 'custom-marker'
+                myMarker.src = '/marker.svg'
+                myMarker.id = `marker${index}`
+                myMarker.height = 38
+                myMarker.width = 28
+            
+                const marker = new mapboxgl.Marker({
+                    element: myMarker
+                })
                     .setLngLat([element.longitude, element.latitude])
                     .addTo(map.current)
-            }
+                    
+                    marker.getElement().addEventListener('click', (el) => {
+                        // Pobieranie współrzędnych klikniętego markera
+                        
+                        el.target.classList.add('active')
+                        
+                        const lngLat = marker.getLngLat();
+                      
+                        // Wycentrowanie mapy na kliknięty marker (możesz użyć flyTo lub setCenter)
+                        map.current.flyTo({
+                          center: lngLat,
+                        });
+                    });
+            });
+
+            // for (const element of elements) {
+
+                
+            //     const myMarker = document.createElement('img')
+            //     myMarker.className = 'custom-marker'
+            //     myMarker.src = '/marker.svg'
+            //     // myMarker.id = 'lol'
+            //     myMarker.height = 38
+            //     myMarker.width = 28
+            
+            //     const marker = new mapboxgl.Marker({
+            //         element: myMarker
+            //     })
+            //         .setLngLat([element.longitude, element.latitude])
+            //         .addTo(map.current)
+            // }
         }
+    }
+    
+    const filteredElements2 = (country, types) => {
+        const result = listPlaces.filter((element) => {
+            const isInCountryArray = country.some((countryEl) =>
+                element.states_name_en.includes(countryEl)
+            )
+
+            const isInTypesArray = types.some((typeEl) =>
+                element.category.includes(typeEl)
+            )
+
+            if (types.length > 0) {
+                return isInCountryArray && isInTypesArray
+            } else {
+                return isInCountryArray
+            }
+        })
+
+        return result
     }
 
     useEffect(() => {
@@ -83,7 +163,7 @@ const Map = ({ country, types }) => {
         if (map.current) return // initialize map only once
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
-            style: "mapbox://styles/mapbox/streets-v12",
+            style: "mapbox://styles/mapbox/navigation-day-v1",
             center: [lng, lat],
             zoom: zoom,
         })
@@ -96,52 +176,53 @@ const Map = ({ country, types }) => {
 
         // Funkcja odpowiedzialna za podswietlenie i wycentrowanie jesli uzytkownik kliknie na maker
 
-        map.current.on("move", () => {
-            setLng(map.current.getCenter().lng.toFixed(4))
-            setLat(map.current.getCenter().lat.toFixed(4))
-            setZoom(map.current.getZoom().toFixed(2))
-        })
+        // map.current.on("move", () => {
+        //     setLng(map.current.getCenter().lng.toFixed(4))
+        //     setLat(map.current.getCenter().lat.toFixed(4))
+        //     setZoom(map.current.getZoom().toFixed(2))
+        // })
 
         // return () => {
         //     window.removeEventListener("scroll", handleScroll)
         //     window.removeEventListener("resize", handleScroll)
         // }
+        
+        const result2 = filteredElements2(locationsInArray, typesInArray)
+        
+        setFormResults(result2)
+        
+        mapChange(result2)
+        
     }, [])
 
     useEffect(() => {
-        // mapChange(filteredElements)
-        // const filteredElements2 = listItems(country, types)
 
-        const filteredElements2 = (country, types) => {
-            const result = listPlaces.filter((element) => {
-                const isInCountryArray = country.some((countryEl) =>
-                    element.states_name_en.includes(countryEl)
-                )
-
-                const isInTypesArray = types.some((typeEl) =>
-                    element.category.includes(typeEl)
-                )
-
-                if (types.length > 0) {
-                    return isInCountryArray && isInTypesArray
-                } else {
-                    return isInCountryArray
-                }
-            })
-
-            return result
-        }
-
-        const result = filteredElements2(formData.locations, formData.types)
-
-        mapChange(result)
+        mapChange(formResults)
+        console.log('map reload')
+        
     }, [formResults])
+    
+    useEffect(() => {
+        if (selectItemIndex !== null) {
+            
+            const marker = document.querySelector(`#marker${selectItemIndex}`);
+            const markers = document.querySelectorAll(`.custom-marker`);
+            
+            if (marker) {
+                markers.forEach(element => {
+                    element.classList.remove('active')    
+                })
+                marker.click()
+            }
+            
+        }
+    }, [selectItemIndex])
 
     return (
         <>
-            <div className="sidebar">
+            {/* <div className="sidebar">
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div>
+            </div> */}
 
             <div
                 id="map"

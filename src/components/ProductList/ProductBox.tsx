@@ -1,4 +1,7 @@
+'use client'
+
 import Image from "next/image"
+import { useGlobalContext } from "@/context/ThemeContext"
 import { IUnescoObjestProps } from "@/utils/interfaces"
 
 const ProductBox: React.FC<IUnescoObjestProps> = ({
@@ -7,10 +10,18 @@ const ProductBox: React.FC<IUnescoObjestProps> = ({
     image,
     states_name,
     short_description,
+    index
 }) => {
+    
+    const { selectItemIndex, setSelectItemIndex } = useGlobalContext()
+    
+    const selectItem = () => {
+        setSelectItemIndex(index)
+    }  
+    
     return (
         <>
-            <div className="productBox">
+            <div className={index == selectItemIndex ? "productBox active" : "productBox"} onClick={selectItem}>
                 <div className="image relative">
                     {image ? (
                         <Image

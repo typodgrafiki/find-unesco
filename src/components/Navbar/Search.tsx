@@ -73,8 +73,8 @@ const Search = () => {
     const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
         event.preventDefault()
 
-        console.log("Kraje:", formData.locations)
-        console.log("Typy:", formData.types)
+        // console.log("Kraje:", formData.locations)
+        // console.log("Typy:", formData.types)
         // console.log(formResults.results)
 
         const url = () => {
@@ -159,23 +159,25 @@ const Search = () => {
             ref={formRef}
             onSubmit={handleSubmit}
         >
-            <div
-                className={openSearch ? "formControl blocked" : "formControl"}
-                // onClick={() => setOpenSearch(true)}
-                onClick={openSearchHandler}
-            >
-                {formData.locations[0]
-                    ? formData.locations.map((element) => element + ", ")
-                    : "Search for a place..."}
+            <div className="relative">
+                <div
+                    className={openSearch ? "formControl blocked" : "formControl"}
+                    // onClick={() => setOpenSearch(true)}
+                    onClick={openSearchHandler}
+                >
+                    {formData.locations[0]
+                        ? formData.locations.map((element) => element + ", ")
+                        : "Search for a place..."}
+                </div>
+                <button className="btn btnIcon btnDark">
+                    <Image
+                        src={img.src}
+                        width={18}
+                        height={18}
+                        alt="search"
+                    />
+                </button>
             </div>
-            <button className="btn btnIcon btnDark">
-                <Image
-                    src={img.src}
-                    width={18}
-                    height={18}
-                    alt="search"
-                />
-            </button>
             {openSearch && (
                 <>
                     <div className="dropdownMenu show">

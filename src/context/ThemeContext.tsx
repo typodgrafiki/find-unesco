@@ -44,6 +44,8 @@ const ThemeContext = createContext<ThemeContextType>({
     setFormResults: () => {},
     showModal: false,
     setShowModal: () => {},
+    selectItemIndex: null,
+    setSelectItemIndex: () => {}
 })
 
 export const ThemeProvider = ({ children }) => {
@@ -55,6 +57,7 @@ export const ThemeProvider = ({ children }) => {
         types: [],
     })
     const [formResults, setFormResults] = useState<FormResults>([])
+    const [selectItemIndex, setSelectItemIndex] = useState(null)
 
     return (
         <ThemeContext.Provider
@@ -69,6 +72,8 @@ export const ThemeProvider = ({ children }) => {
                 setSearchQuery,
                 formResults,
                 setFormResults,
+                selectItemIndex,
+                setSelectItemIndex
             }}
         >
             {children}

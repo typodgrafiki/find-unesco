@@ -22,6 +22,11 @@
         flex-basis: 32%;
         max-width: 430px;
         
+        .relative 
+        {
+            width: 100%;
+        }
+        
         .dropdownMenu
         {
             width: 90vw;

@@ -14,35 +14,30 @@ const SearchPage = () => {
     const { formData } = useGlobalContext()
 
     useEffect(() => {
-        const handleScroll = () => {
-            const footerHeight = document
-                .querySelector("#footer")
-                .getBoundingClientRect().height
-            const bottomOfViewport = window.innerHeight + window.scrollY
-            const visibleFooter =
-                bottomOfViewport - document.body.scrollHeight + footerHeight
-            setFooterVisible(visibleFooter > 0 ? visibleFooter + 10 : 10)
-        }
+        
+        // const handleScroll = () => {
+        //     const footerHeight = document
+        //         .querySelector("#footer")
+        //         .getBoundingClientRect().height
+        //     const bottomOfViewport = window.innerHeight + window.scrollY
+        //     const visibleFooter =
+        //         bottomOfViewport - document.body.scrollHeight + footerHeight
+        //     setFooterVisible(visibleFooter > 0 ? visibleFooter + 10 : 10)
+        // }
 
-        handleScroll()
+        // handleScroll()
 
-        window.addEventListener("scroll", handleScroll)
-        window.addEventListener("resize", handleScroll)
+        // window.addEventListener("scroll", handleScroll)
+        // window.addEventListener("resize", handleScroll)
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll)
-            window.removeEventListener("resize", handleScroll)
-        }
+        // return () => {
+        //     window.removeEventListener("scroll", handleScroll)
+        //     window.removeEventListener("resize", handleScroll)
+        // }
     }, [])
 
     return (
-        <>
-            {formData.locations.map((el) => el)}
-            <br />
-            {formData.types.map((el) => el)}
-            <br />
-            {/* {formData.result} */}
-            <br />
+        <>  
             <div className="container mapContainer">
                 <ProductList
                     country={country}

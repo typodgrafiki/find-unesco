@@ -127,7 +127,23 @@
 .searchList .productBox
 {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
+    transition: all .1s ease;
+    padding: 13px 26px 13px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    &:hover, &.active
+    {
+        background-color: #dddddd82;
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+    
+    &.active
+    {
+        background-color: rgb(221 221 221 / 74%);
+    }
     
     .image 
     {
@@ -183,5 +199,26 @@
         right: 10px;
         bottom: 10px;
         top: 90px;
+        
+        .custom-marker
+        {
+            cursor: pointer;
+            
+            &:hover 
+            {
+                opacity: .4;
+            }
+            
+            .path
+            {
+
+            }
+            
+            &.active 
+            {
+                z-index: 1;
+                opacity: .5;
+            }
+        }
     }
 }

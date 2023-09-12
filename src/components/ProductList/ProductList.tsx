@@ -13,7 +13,7 @@ interface ProductListProps {
 
 const ProductList: FC.React<ProductListProps> = ({ country, iso, types }) => {
     // const countryLowerCase: string = country?.toLowerCase() || ''
-
+    
     const countryArray: string[] = toArray(country)
     const countryTitle: string = countryArray.join(", ")
     const typesArray: string[] = toArray(types)
@@ -70,6 +70,7 @@ const ProductList: FC.React<ProductListProps> = ({ country, iso, types }) => {
                             image={element.image}
                             states_name={element.states_name_en}
                             short_description={element.short_description_en}
+                            index={index}
                         />
                     ))}
                 </div>
