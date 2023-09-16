@@ -8,9 +8,9 @@ const Modal = () => {
     
     const { showModal, setShowModal } = useGlobalContext()
     
-    const handleEsc = (event) => {
-        if (event.type === 'click' || event.key === "Escape") {
-            setShowModal(false)   
+    const handleEsc = (event: any) => {
+        if (event.type === "click" || event.key === "Escape") {
+            setShowModal(false)
         }
     }
     

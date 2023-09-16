@@ -24,6 +24,7 @@
         "xml2js": "^0.6.0"
     },
     "devDependencies": {
+        "@types/mapbox-gl": "^2.7.14",
         "sass": "^1.62.1"
     }
 }

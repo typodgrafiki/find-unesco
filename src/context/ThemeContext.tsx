@@ -1,13 +1,20 @@
 'use client'
  
-import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react'
- 
+import {
+    createContext,
+    useContext,
+    useState,
+    Dispatch,
+    SetStateAction,
+    ReactNode,
+} from "react"
+
 interface FormData {
     locations: string[]
     types: string[]
 }
 
-interface FormResults {
+export interface FormResults {
     name_en: string
     short_description_en: string
     longitude: number
@@ -17,8 +24,8 @@ interface FormResults {
     region_en: string
     iso_code: string
     udnp_code: string
-    image: string
-    link: string
+    image?: string
+    link?: string
 }
 
 interface ThemeContextType {
@@ -26,10 +33,14 @@ interface ThemeContextType {
     setOpenSearch: Dispatch<SetStateAction<boolean>>
     formData: FormData
     setFormData: Dispatch<SetStateAction<FormData>>
-    formResults: FormResults
-    setFormResults: Dispatch<SetStateAction<FormResults>>
+    formResults: FormResults[]
+    setFormResults: Dispatch<SetStateAction<FormResults[]>>
     showModal: boolean
     setShowModal: Dispatch<SetStateAction<boolean>>
+    selectItemIndex: number | null
+    setSelectItemIndex: Dispatch<SetStateAction<number | null>>
+    searchQuery: any[]
+    setSearchQuery: Dispatch<SetStateAction<any[]>>
 }
 
 const ThemeContext = createContext<ThemeContextType>({
@@ -45,19 +56,21 @@ const ThemeContext = createContext<ThemeContextType>({
     showModal: false,
     setShowModal: () => {},
     selectItemIndex: null,
-    setSelectItemIndex: () => {}
+    setSelectItemIndex: () => {},
+    searchQuery: [],
+    setSearchQuery: () => {},
 })
 
-export const ThemeProvider = ({ children }) => {
-    const [searchQuery, setSearchQuery] = useState([])
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+    const [searchQuery, setSearchQuery] = useState<any[]>([])
     const [openSearch, setOpenSearch] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [formData, setFormData] = useState<FormData>({
         locations: [],
         types: [],
     })
-    const [formResults, setFormResults] = useState<FormResults>([])
-    const [selectItemIndex, setSelectItemIndex] = useState(null)
+    const [formResults, setFormResults] = useState<FormResults[]>([])
+    const [selectItemIndex, setSelectItemIndex] = useState<number | null>(null)
 
     return (
         <ThemeContext.Provider
@@ -73,7 +86,7 @@ export const ThemeProvider = ({ children }) => {
                 formResults,
                 setFormResults,
                 selectItemIndex,
-                setSelectItemIndex
+                setSelectItemIndex,
             }}
         >
             {children}

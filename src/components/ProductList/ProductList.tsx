@@ -1,3 +1,4 @@
+import { FC } from "react"
 import data from "@/lib/listPlacesUnesco.json"
 import Image from "next/image"
 import ProductBox from "./ProductBox"
@@ -11,16 +12,16 @@ interface ProductListProps {
     types?: string
 }
 
-const ProductList: FC.React<ProductListProps> = ({ country, iso, types }) => {
+const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
     // const countryLowerCase: string = country?.toLowerCase() || ''
-    
-    const countryArray: string[] = toArray(country)
+
+    const countryArray: string[] = toArray(country || "")
     const countryTitle: string = countryArray.join(", ")
-    const typesArray: string[] = toArray(types)
+    const typesArray: string[] = toArray(types || "")
     const typesTitle: string = typesArray.join(", ")
 
     const countryElementsFn = () => {
-        const filteredElements = listItems(country, types)
+        const filteredElements = listItems(country || "", types || "")
 
         if (iso) {
             const randomElements = filteredElements
@@ -70,6 +71,7 @@ const ProductList: FC.React<ProductListProps> = ({ country, iso, types }) => {
                             image={element.image}
                             states_name={element.states_name_en}
                             short_description={element.short_description_en}
+                            region_en={element.region_en}
                             index={index}
                         />
                     ))}

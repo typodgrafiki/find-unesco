@@ -12,14 +12,14 @@ const Navbar = () => {
             <Search />
             <div className="buttons">
                 {/* <AddPlace /> */}
-                {dropdownData.map((item) => (
+                {/* {dropdownData.map((item) => (
                     <Dropdown
                         label={item.label}
                         options={item.options}
                         lang={item.lang}
                         key={item.label}
                     />
-                ))}
+                ))} */}
             </div>
         </div>
     )

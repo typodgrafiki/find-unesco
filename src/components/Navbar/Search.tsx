@@ -13,6 +13,7 @@ import {
     listPlacesEurope,
     listCountriesEurope,
 } from "@/utils/filteredPlaces"
+import { FormResults } from "@/context/ThemeContext"
 
 const Search = () => {
     const router = useRouter()
@@ -27,37 +28,41 @@ const Search = () => {
     } = useGlobalContext()
 
     // przechwytuje zdarzenie klikniecia w zamkniecie dropdown
-    const handleEsc = (event: KeyboardEvent) => {
+    const handleEscKey = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+            setOpenSearch(false)
+        }
+    }
+
+    const handleEscMouse = (event: MouseEvent) => {
         if (
-            event.key === "Escape" ||
-            (formRef.current && !formRef.current.contains(event.target))
+            formRef.current &&
+            !formRef.current.contains(event.target as Node)
         ) {
             setOpenSearch(false)
         }
     }
 
     // zbieram dane do state po kliknieciu w labele
-    function handlePlacesChange(event: MouseEvent | KeyboardEvent) {
+    function handlePlacesChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name: typesName, value, checked } = event.target
 
-        setFormData((formData) => {
+        setFormData((prevFormData) => {
+            const updatedFormData = { ...prevFormData }
+
+            const key = typesName as keyof typeof updatedFormData
+
             if (checked) {
-                if (!formData[typesName].includes(value)) {
-                    return {
-                        ...formData,
-                        [typesName]: [...formData[typesName], value],
-                    }
+                if (!updatedFormData[key].includes(value)) {
+                    updatedFormData[key].push(value)
                 }
             } else {
-                return {
-                    ...formData,
-                    [typesName]: formData[typesName].filter(
-                        (item) => item !== value
-                    ),
-                }
+                updatedFormData[key] = updatedFormData[key].filter(
+                    (item) => item !== value
+                )
             }
 
-            return formData
+            return updatedFormData
         })
     }
 
@@ -70,7 +75,7 @@ const Search = () => {
     }
 
     // przechwytywanie wysylania formularza serch
-    const handleSubmit = (event: MouseEvent | KeyboardEvent) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         // console.log("Kraje:", formData.locations)
@@ -110,7 +115,7 @@ const Search = () => {
         if (formData.locations.length > 0) {
             router.push(url())
 
-            const filteredElements3 = (country, types) => {
+            const filteredElements3 = (country: string[], types: string[]) => {
                 const result = listPlaces.filter((element) => {
                     const isInCountryArray = country.some((countryEl) =>
                         element.states_name_en.includes(countryEl)
@@ -144,12 +149,12 @@ const Search = () => {
     }
 
     useEffect(() => {
-        document.addEventListener("keydown", handleEsc)
-        document.addEventListener("mousedown", handleEsc)
+        document.addEventListener("keydown", handleEscKey)
+        document.addEventListener("mousedown", handleEscMouse)
 
         return () => {
-            document.removeEventListener("mousedown", handleEsc)
-            document.removeEventListener("keydown", handleEsc)
+            document.removeEventListener("mousedown", handleEscMouse)
+            document.removeEventListener("keydown", handleEscKey)
         }
     }, [])
 
@@ -161,7 +166,9 @@ const Search = () => {
         >
             <div className="relative">
                 <div
-                    className={openSearch ? "formControl blocked" : "formControl"}
+                    className={
+                        openSearch ? "formControl blocked" : "formControl"
+                    }
                     // onClick={() => setOpenSearch(true)}
                     onClick={openSearchHandler}
                 >
@@ -184,33 +191,42 @@ const Search = () => {
                         <div className="rowCountries">
                             <h3>Europe</h3>
                             <ul className="flagList textLeft">
-                                {listCountriesEurope.map((element) => (
-                                    <li key={element.iso_code}>
-                                        <input
-                                            id={element.states_name_en[0]}
-                                            type="checkbox"
-                                            name="locations"
-                                            value={element.states_name_en[0]}
-                                            onChange={handlePlacesChange}
-                                            hidden
-                                        />
-                                        <label
-                                            className="btn"
-                                            htmlFor={element.states_name_en[0]}
-                                        >
-                                            <Image
-                                                className="radius"
-                                                src={`/flags/${element.iso_code}.svg`}
-                                                height={21}
-                                                width={21}
-                                                alt={element.states_name_en[0]}
+                                {(listCountriesEurope as FormResults[]).map(
+                                    (element: FormResults) => (
+                                        <li key={element.iso_code}>
+                                            <input
+                                                id={element.states_name_en[0]}
+                                                type="checkbox"
+                                                name="locations"
+                                                value={
+                                                    element.states_name_en[0]
+                                                }
+                                                onChange={handlePlacesChange}
+                                                hidden
                                             />
-                                            <span>
-                                                {element.states_name_en[0]}
-                                            </span>
-                                        </label>
-                                    </li>
-                                ))}
+                                            <label
+                                                className="btn"
+                                                htmlFor={
+                                                    element.states_name_en[0]
+                                                }
+                                            >
+                                                <Image
+                                                    className="radius"
+                                                    src={`/flags/${element.iso_code}.svg`}
+                                                    height={21}
+                                                    width={21}
+                                                    alt={
+                                                        element
+                                                            .states_name_en[0]
+                                                    }
+                                                />
+                                                <span>
+                                                    {element.states_name_en[0]}
+                                                </span>
+                                            </label>
+                                        </li>
+                                    )
+                                )}
                             </ul>
                             <ul className="typesList textCenter">
                                 {listTypes.map((element) => (

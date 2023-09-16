@@ -49,4 +49,5 @@ const dropdownData: DropdownData = [
     },
 ]
 
-export { IDropdownProps, IDropdownLiProps, dropdownData }
+export { dropdownData }
+export type { IDropdownProps, IDropdownLiProps }
