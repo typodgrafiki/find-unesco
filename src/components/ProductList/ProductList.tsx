@@ -1,5 +1,4 @@
 import { FC } from "react"
-import data from "@/lib/listPlacesUnesco.json"
 import Image from "next/image"
 import ProductBox from "./ProductBox"
 
@@ -26,7 +25,7 @@ const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
         if (iso) {
             const randomElements = filteredElements
                 .sort(() => 0.5 - Math.random())
-                .slice(0, 8)
+                .slice(0, 4)
             return randomElements
         }
 
@@ -39,26 +38,35 @@ const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
     return (
         <div>
             <div className="titleRow flex flexJustifyBetween flexAlignCenter">
-                <h2 className="title">
-                    {iso && (
-                        <Image
-                            src={`flags/${iso}.svg`}
-                            alt={country}
-                            width={21}
-                            height={21}
-                        />
-                    )}
-                    {countryTitle}
-                    <small className="block">{typesTitle}</small>
-                </h2>
-                {iso && (
-                    <a
-                        href={`/search?locations=${country}`}
-                        className="btn btnDefault"
-                    >
-                        Show more
-                    </a>
+                {iso ? (
+                    <>
+                        <h2 className="title">
+                            <Image
+                                src={`flags/${iso}.svg`}
+                                alt={country}
+                                width={21}
+                                height={21}
+                            />
+                            <a
+                                href={`/search?locations=${country}`}
+                            >
+                                {countryTitle}
+                            </a>
+                        </h2>
+                        <a
+                            href={`/search?locations=${country}`}
+                            className="btn btnDefault"
+                        >
+                            Show more
+                        </a>
+                    </>
+                ) : (
+                    <h2 className="title">
+                        {countryTitle}
+                        <small className="block">{typesTitle}</small>
+                    </h2>
                 )}
+                
             </div>
             {!iso && <div>Liczba wyników: {numberElements}</div>}
             {elements.length ? (

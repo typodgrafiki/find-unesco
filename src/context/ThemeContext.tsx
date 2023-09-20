@@ -26,6 +26,15 @@ export interface FormResults {
     udnp_code: string
     image?: string
     link?: string
+    id: number
+}
+
+interface Modal {
+    open: boolean,
+    title: string,
+    description: string,
+    image?: string,
+    action?: string
 }
 
 interface ThemeContextType {
@@ -35,8 +44,8 @@ interface ThemeContextType {
     setFormData: Dispatch<SetStateAction<FormData>>
     formResults: FormResults[]
     setFormResults: Dispatch<SetStateAction<FormResults[]>>
-    showModal: boolean
-    setShowModal: Dispatch<SetStateAction<boolean>>
+    showModal: Modal
+    setShowModal: Dispatch<SetStateAction<Modal>>
     selectItemIndex: number | null
     setSelectItemIndex: Dispatch<SetStateAction<number | null>>
     searchQuery: any[]
@@ -53,7 +62,11 @@ const ThemeContext = createContext<ThemeContextType>({
     setFormData: () => {},
     formResults: [],
     setFormResults: () => {},
-    showModal: false,
+    showModal: {
+        open: false,
+        title: '',
+        description: '',
+    },
     setShowModal: () => {},
     selectItemIndex: null,
     setSelectItemIndex: () => {},
@@ -64,7 +77,12 @@ const ThemeContext = createContext<ThemeContextType>({
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [searchQuery, setSearchQuery] = useState<any[]>([])
     const [openSearch, setOpenSearch] = useState(false)
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState<Modal>({
+        open: false,
+        title: '',
+        description: '',
+        action: ''
+    })
     const [formData, setFormData] = useState<FormData>({
         locations: [],
         types: [],

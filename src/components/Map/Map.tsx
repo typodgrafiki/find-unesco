@@ -2,7 +2,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { useSearchParams } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
-// import mapboxgl from "!mapbox-gl"
 import mapboxgl from 'mapbox-gl'
 import "mapbox-gl/dist/mapbox-gl.css"
 import listPlaces from "@/lib/listPlacesUnesco.json"
@@ -32,7 +31,6 @@ const Map = () => {
     }
 
     function mapChange(elements: Array<any>) {
-        console.log(elements)
         removeAllMarkers()
         if (elements.length) {
             const bounds = new mapboxgl.LngLatBounds()

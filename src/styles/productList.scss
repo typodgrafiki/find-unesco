@@ -58,14 +58,14 @@
     
     .labels 
     {
-        align-items: flex-start;
+        align-items: center;
         list-style: none;
         margin: 10px 0 0;
         padding: 0;
         gap: 5px;
         flex-wrap: wrap;
         
-        li 
+        .country
         {
             background-color: #D6D1CA;
             border-radius: 20px;
@@ -78,10 +78,15 @@
             max-width: 90%;
         }
         
-        .country
+        .category 
         {
-            background-color: #C5C7CD;
+            display: flex;
+            align-items: center;
+            max-height: 26px;
+            opacity: 0.8;
+            margin-right: 3px;
         }
+    
     }
     
     .star  

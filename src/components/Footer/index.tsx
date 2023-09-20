@@ -43,12 +43,12 @@ const Footer = () => {
                         </li> */}
                     </ul>
                     <ul className="flexJustifyEnd">
-                        <li>
+                        {/* <li>
                             <a href="/">English</a>
                         </li>
                         <li>
                             <a href="/">Polish</a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
                 <p className="textCenter copyright">© 2023 FindUNESCO inc.</p>

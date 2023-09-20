@@ -6,7 +6,7 @@ const Homepage = () => {
     return (
         <>
             <FrontendLayout>
-                <Baner />
+                <Baner id={1041} />
                 <div className="container">
                     <ProductList 
                         country="Poland" 

@@ -17,4 +17,50 @@
     padding: 20px;
     border-radius: 20px;
     z-index: 11;
+    
+    .modalTitle 
+    {
+        margin: 0 0 10px;
+    }
+    
+    .close
+    {
+        font-size: 0;
+        display: block;
+        position: absolute;
+        height: 28px;    
+        width: 28px;
+        background-color: #ddd;
+        top: -10px;
+        right: -10px;
+        border-radius: 50%;
+        cursor: pointer;
+        color: #585858;
+        transition: all .2s ease;
+        
+        &:before,
+        &:after 
+        {
+            display: block;
+            content: '';
+            height: 1px;
+            width: 12px;
+            background-color: currentColor;
+            position: absolute;
+            top: 14px;
+            left: 8px;
+            transform: rotate(45deg);
+            transition: all .2s ease;
+        }
+        &:after 
+        {
+            transform: rotate(-45deg);
+        }
+        
+        &:hover 
+        {
+            background-color: #585858;
+            color: #fff;
+        }
+    }
 }

@@ -10,7 +10,12 @@ const Modal = () => {
     
     const handleEsc = (event: any) => {
         if (event.type === "click" || event.key === "Escape") {
-            setShowModal(false)
+            setShowModal({
+                open: false,
+                title: "",
+                description: "",
+                image: ""
+            });
         }
     }
     
@@ -23,22 +28,25 @@ const Modal = () => {
     
     return (
         <>
-            {showModal && (
+            {showModal.open && (
                 <>
                     <div className="shadowModal"></div>
                     <div className="modal">
                         <div className="close" onClick={handleEsc}>close</div>
+                        <div className="image">
+                            {showModal.image}
+                        </div>
                         <h3 className="modalTitle">
-                            Title
+                            {showModal.title}
                         </h3>
                         <div className="modalContent">
-                            Modal content
+                            {showModal.description}
                         </div>
-                        <div className="modalFooter">
+                        {/* <div className="modalFooter">
                             <a className="btn btnPrimary">
                                 Zapisz
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                 </>
             )}

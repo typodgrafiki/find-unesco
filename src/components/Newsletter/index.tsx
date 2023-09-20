@@ -6,10 +6,7 @@ const Newsletter: React.FC = () => {
             <section className="newsletter relative">
                 <div className="container">
                     <h4>Newsletter</h4>
-                    <p>
-                        Discover tranquility and harmony in a leafy haven
-                        nestled within the peaceful Chinese misty.
-                    </p>
+                    <p>Sign up for the newsletter and receive the latest information</p>
                     <form className="flex">
                         <input
                             type="text"
