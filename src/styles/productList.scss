@@ -67,15 +67,16 @@
         
         .country
         {
-            background-color: #D6D1CA;
+            background-color: #d6d1ca78;
             border-radius: 20px;
-            color: var(--dark);
-            padding: 4px 12px;
-            font-size: 1.3rem;
+            color: #61686c;
+            padding: 2px 8px;
+            font-size: 1.2rem;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
             max-width: 90%;
+            font-style: italic;
         }
         
         .category 
