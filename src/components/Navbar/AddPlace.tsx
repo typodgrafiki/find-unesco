@@ -6,7 +6,7 @@ const AddPlace = () => {
     const { showModal, setShowModal } = useGlobalContext()
     
     const handlerAddPlace = () => {
-        setShowModal(!showModal)
+        setShowModal(prevModal => ({ ...prevModal, open: !prevModal.open }));
     }
 
     return (
