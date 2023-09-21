@@ -11,16 +11,16 @@ const Newsletter: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        try {            
-            const response = await axios.post('/api/newsletter', { email });
-            if (response.data.success) {
-                toast.success('Successfully subscribed to the newsletter!');
-            }else{
-                console.log('no1')
-            }
-        } catch (error) {
-          toast.error('An error occurred. Please try again.');
-        }
+        // try {            
+        //     const response = await axios.post('/api/newsletter', { email });
+        //     if (response.data.success) {
+        //         toast.success('Successfully subscribed to the newsletter!');
+        //     }else{
+        //         console.log('no1')
+        //     }
+        // } catch (error) {
+        //   toast.error('An error occurred. Please try again.');
+        // }
     };
   
     return (
