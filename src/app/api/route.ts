@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
     const prisma = new PrismaClient()
 
     const url = new URL(req.url || "")
