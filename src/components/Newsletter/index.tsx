@@ -13,7 +13,9 @@ const Newsletter: React.FC = () => {
 
         if (email) {
             try {
-                const response = await axios.post(`/api?email=${email}`)
+                const response = await axios.post(
+                    `/newsletter/add?email=${email}`
+                )
                 console.log(response.data.email)
                 if (response.data.success) {
                     toast.success("Zapisałeś się na newsletter", {

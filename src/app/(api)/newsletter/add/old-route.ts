@@ -13,10 +13,9 @@ export async function GET() {
         //         email: "alice@222",
         //     },
         // })
-
-        const allUsers = await prisma.user.findMany()
+        // const allUsers = await prisma.user.findMany()
         // console.dir(allUsers)
-        return allUsers
+        // return allUsers
     }
 
     main()
