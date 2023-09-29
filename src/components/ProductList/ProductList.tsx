@@ -65,7 +65,7 @@ const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
                     </h2>
                 )}
             </div>
-            {!iso && <div>Liczba wyników: {numberElements}</div>}
+            {!iso && <div>Number of results: {numberElements}</div>}
             {elements.length ? (
                 <div className={iso ? "productList" : "searchList"}>
                     {elements.map((element, index) => (
@@ -84,7 +84,7 @@ const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
                     ))}
                 </div>
             ) : (
-                <div>Brak wyników dla zapytania.</div>
+                <div>No results found for your query.</div>
             )}
         </div>
     )

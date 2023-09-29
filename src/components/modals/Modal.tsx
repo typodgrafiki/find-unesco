@@ -90,7 +90,7 @@ const Modal = () => {
                                 className="btn btnDefault pointer"
                                 onClick={handleEsc}
                             >
-                                Zamknij
+                                Close
                             </a>
                         </div>
 
