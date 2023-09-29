@@ -1,8 +1,8 @@
 "use client"
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
-import mapboxgl from 'mapbox-gl'
+import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import listPlaces from "@/lib/listPlacesUnesco.json"
 import { FormResults } from "@/context/ThemeContext"
@@ -17,7 +17,8 @@ const Map = () => {
 
     const mapContainer = useRef(null)
     const map = useRef<mapboxgl.Map | null>(null)
-    const { formResults, setFormResults, selectItemIndex } = useGlobalContext()
+    const { formResults, setFormResults, selectItemIndex, setSelectItemIndex } =
+        useGlobalContext()
 
     const typesInArray = (types && types.split(",")) || []
     const locationsInArray = (country && country.split(",")) || []
@@ -28,6 +29,23 @@ const Map = () => {
         markers.forEach((marker) => {
             marker.remove()
         })
+    }
+
+    function scrollToElement(element: HTMLElement | null) {
+        if (element) {
+            if (window.innerWidth < 768) {
+                const offset = 80 // Odstęp od góry w pikselach
+                const elementRect = element.getBoundingClientRect()
+                const bodyRect = document.body.getBoundingClientRect()
+                const scrollTop = elementRect.top - bodyRect.top - offset
+                window.scrollTo({
+                    top: scrollTop,
+                    behavior: "smooth",
+                })
+            } else {
+                element.scrollIntoView({ block: "center", behavior: "smooth" })
+            }
+        }
     }
 
     function mapChange(elements: Array<any>) {
@@ -48,12 +66,14 @@ const Map = () => {
             }
 
             elements.forEach((element, index) => {
-                const myMarker = document.createElement("img")
+                const myMarker = document.createElement("div")
+                const myMarkerImg = document.createElement("img")
                 myMarker.className = "custom-marker"
-                myMarker.src = "/marker.svg"
+                myMarkerImg.src = "/marker.svg"
                 myMarker.id = `marker${index}`
-                myMarker.height = 38
-                myMarker.width = 28
+                myMarkerImg.height = 38
+                myMarkerImg.width = 28
+                myMarker.appendChild(myMarkerImg)
 
                 if (map.current) {
                     const marker = new mapboxgl.Marker({
@@ -65,16 +85,39 @@ const Map = () => {
                     marker.getElement().addEventListener("click", (el) => {
                         // Pobieranie współrzędnych klikniętego markera
                         if (el.target instanceof HTMLElement) {
+                            const markers =
+                                document.querySelectorAll(`.custom-marker`)
+                            markers.forEach((element) => {
+                                element.classList.remove("active")
+                                const imgElement = element.querySelector("img")
+                                if (imgElement) {
+                                    imgElement.src = "/marker.svg"
+                                }
+                            })
+
                             el.target.classList.add("active")
+                            const imgElement = el.target.querySelector("img")
+                            if (imgElement) {
+                                imgElement.src = "/markerActive.svg"
+                            }
                         }
 
                         const lngLat = marker.getLngLat()
 
-                        // Wycentrowanie mapy na kliknięty marker (możesz użyć flyTo lub setCenter)
                         if (map.current) {
                             map.current.flyTo({
                                 center: lngLat,
                             })
+
+                            const searchList =
+                                document.querySelector(`.searchList`)
+                            const childDiv = searchList?.children[index]
+
+                            if (childDiv instanceof HTMLElement) {
+                                scrollToElement(childDiv)
+                            }
+
+                            setSelectItemIndex(index)
                         }
                     })
                 }
@@ -118,7 +161,7 @@ const Map = () => {
             typesInArray
         )
 
-        console.log(result2)
+        // console.log(result2)
 
         setFormResults(result2)
 
@@ -132,16 +175,24 @@ const Map = () => {
     useEffect(() => {
         if (selectItemIndex !== null) {
             const marker = document.querySelector(`#marker${selectItemIndex}`)
+            const searchList = document.querySelector(`.searchList`)
             const markers = document.querySelectorAll(`.custom-marker`)
 
             if (marker) {
                 markers.forEach((element) => {
                     element.classList.remove("active")
+                    const imgElement = element.querySelector("img")
+                    if (imgElement) {
+                        imgElement.src = "/marker.svg"
+                    }
                 })
 
                 if (marker instanceof HTMLElement) {
                     marker.dispatchEvent(new Event("click"))
                 }
+
+                const childDiv = searchList?.children[selectItemIndex]
+                childDiv?.classList.add("active")
             }
         }
     }, [selectItemIndex])

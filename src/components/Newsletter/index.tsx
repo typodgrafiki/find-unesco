@@ -45,7 +45,10 @@ const Newsletter: React.FC = () => {
                         Sign up for the newsletter and receive the latest
                         information
                     </p>
-                    <form onSubmit={handleSubmit}>
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex"
+                    >
                         <input
                             className="formControl"
                             placeholder="john@example.com"

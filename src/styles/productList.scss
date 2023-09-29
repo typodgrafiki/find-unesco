@@ -1,72 +1,61 @@
-.title img
-{
-    margin-right: 10px;   
+.title img {
+    margin-right: 10px;
     border-radius: 50%;
 }
 
-.productBox
-{
-    .image 
-    {
-        background-color: #fff;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 10px 10px rgba(0 0 0 / 3%);        
-        aspect-ratio: 16/11;
-        
-        .blankImage
-        {
-            height: 100%;
-            width: 100%;
-            align-items: center;
-            justify-content: center;
-            background: #EEEEEE;
-        }
-    
-        img
-        {
-            object-fit: cover;  
-            width: 100%;
-            height: 100%;  
-        }
+.image {
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0 0 0 / 3%);
+    aspect-ratio: 16/11;
+
+    .blankImage {
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        background: #eeeeee;
     }
-    
-    .name 
-    {
+
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.productBox {
+    .name {
         font-size: 1.6rem;
         margin: 9px 0 7px;
     }
-    
-    .reviews
-    {
-        margin-top: 7px;  
+
+    .reviews {
+        margin-top: 7px;
         color: var(--dark);
         font-size: 1.6rem;
         margin-left: 10px;
-        
-        svg 
-        {
+
+        svg {
             margin-right: 3px;
             margin-top: 4px;
         }
     }
-    
-    .description
-    {
-        color: #8F9495;
+
+    .description {
+        color: #8f9495;
     }
-    
-    .labels 
-    {
+
+    .labels {
         align-items: center;
         list-style: none;
         margin: 10px 0 0;
         padding: 0;
         gap: 5px;
         flex-wrap: wrap;
-        
-        .country
-        {
+
+        .country {
             background-color: #d6d1ca78;
             border-radius: 20px;
             color: #61686c;
@@ -78,86 +67,88 @@
             max-width: 90%;
             font-style: italic;
         }
-        
-        .category 
-        {
+
+        .category {
             display: flex;
             align-items: center;
             max-height: 26px;
             opacity: 0.8;
             margin-right: 3px;
         }
-    
     }
-    
-    .star  
-    {
+
+    .star {
         position: absolute;
         top: 13px;
         right: 13px;
-        
-        svg
-        {
+
+        svg {
             stroke: #ffffff;
             fill: transparent;
-            transition: all .2s ease;
+            transition: all 0.2s ease;
             cursor: pointer;
         }
-        
-        &.active svg, &:hover svg
-        {
-            stroke: #CBA97A;
-            fill: #CBA97A;
+
+        &.active svg,
+        &:hover svg {
+            stroke: #cba97a;
+            fill: #cba97a;
         }
     }
 }
 
-.productList
-{
-    --grid_column: 4;
+.productList {
+    --grid_column: 2;
     display: grid;
-    grid-template-columns: repeat(var(--grid_column),1fr);
+    grid-template-columns: repeat(var(--grid_column), 1fr);
     gap: 40px 30px;
     grid-auto-flow: dense;
     margin-bottom: 30px;
-    
-    .description
-    {
+
+    .description {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
         overflow: hidden;
     }
+
+    .productBox {
+        cursor: pointer;
+
+        .image img {
+            transition: all 0.3s ease;
+        }
+
+        &:hover .image img {
+            transform: scale(1.03);
+        }
+    }
 }
 
-.searchList .productBox
-{
+.searchList .productBox {
     display: flex;
     margin-bottom: 2px;
-    transition: all .1s ease;
+    transition: all 0.1s ease;
     padding: 13px 26px 13px 0;
     border-radius: 10px;
     cursor: pointer;
-    
-    &:hover, &.active
-    {
+
+    &:hover,
+    &.active {
         background-color: #dddddd82;
         padding-left: 13px;
         padding-right: 13px;
     }
-    
-    &.active
-    {
+
+    &.active {
         background-color: rgb(221 221 221 / 74%);
     }
-    
-    .image 
-    {
+
+    .image {
         width: 25%;
     }
-    
-    .caption 
-    {
+
+    .caption {
         width: 75%;
         padding-left: 20px;
     }
@@ -177,54 +168,65 @@
     z-index: 999;
 }
 
-.mapContainer
-{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px 30px;
-    
-    .titleRow
-    {
-        grid-column: span 2;
-        
-        small 
-        {
-            font-weight: 400;
-            font-size: 17px;
-            line-height: 140%;
-            margin-top: 4px;
+.mapContainer {
+    #map {
+        background-color: #d5d5d5;
+        // position: fixed;
+        position: sticky;
+        // top: 60%;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        height: 40vh;
+        margin-top: 20px;
+        border-radius: 20px;
+
+        .custom-marker {
+            cursor: pointer;
+            transition: top 0.2s ease;
+
+            img {
+                pointer-events: none;
+            }
+
+            &:hover {
+                top: -2px;
+            }
+
+            .path {
+            }
+
+            &.active {
+                z-index: 1;
+            }
         }
     }
-    
-    #map
-    {
-        background-color: #d5d5d5;
-        border-radius: 20px;
-        position: fixed;
-        left: calc(50% + 20px);
-        right: 10px;
-        bottom: 10px;
-        top: 90px;
-        
-        .custom-marker
-        {
-            cursor: pointer;
-            
-            &:hover 
-            {
-                opacity: .4;
-            }
-            
-            .path
-            {
+}
 
+@media (min-width: 768px) {
+    .productList {
+        --grid_column: 4;
+    }
+
+    .mapContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 30px;
+
+        .titleRow {
+            grid-column: span 2;
+
+            small {
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 140%;
+                margin-top: 4px;
             }
-            
-            &.active 
-            {
-                z-index: 1;
-                opacity: .5;
-            }
+        }
+
+        #map {
+            top: 100px;
+            height: calc(100vh - 130px);
         }
     }
 }

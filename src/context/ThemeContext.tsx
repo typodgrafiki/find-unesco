@@ -1,5 +1,5 @@
-'use client'
- 
+"use client"
+
 import {
     createContext,
     useContext,
@@ -30,11 +30,14 @@ export interface FormResults {
 }
 
 interface Modal {
-    open: boolean,
-    title: string,
-    description: string,
-    image?: string,
+    open: boolean
+    title: string
+    description: string
+    image?: string
     action?: string
+    link?: string
+    category?: string
+    country?: string[]
 }
 
 interface ThemeContextType {
@@ -64,8 +67,8 @@ const ThemeContext = createContext<ThemeContextType>({
     setFormResults: () => {},
     showModal: {
         open: false,
-        title: '',
-        description: '',
+        title: "",
+        description: "",
     },
     setShowModal: () => {},
     selectItemIndex: null,
@@ -79,9 +82,8 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [openSearch, setOpenSearch] = useState(false)
     const [showModal, setShowModal] = useState<Modal>({
         open: false,
-        title: '',
-        description: '',
-        action: ''
+        title: "",
+        description: "",
     })
     const [formData, setFormData] = useState<FormData>({
         locations: [],

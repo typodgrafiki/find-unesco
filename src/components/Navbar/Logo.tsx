@@ -4,7 +4,10 @@ import logoImg from "../../assets/images/logo.svg"
 
 const Logo = () => {
     return (
-        <Link href="/">
+        <Link
+            href="/"
+            className="logo"
+        >
             <Image
                 src={logoImg.src}
                 width={222}

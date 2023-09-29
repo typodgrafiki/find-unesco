@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useGlobalContext } from "@/context/ThemeContext"
 import data from "@/lib/listPlacesUnesco.json"
 import "@/styles/baner.scss"
@@ -8,19 +8,21 @@ interface BanerProps {
 }
 
 const Baner = ({ id }: BanerProps) => {
-    
     const { showModal, setShowModal } = useGlobalContext()
-    const item = data.find(entry => entry.id === id);
-    
+    const item = data.find((entry) => entry.id === id)
+
     const openModal = (element: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal({
             open: true,
             title: item?.name_en || "",
             description: item?.short_description_en || "",
-            image: 'image xD'
-        });
+            image: item?.image || "",
+            link: item?.link || "",
+            category: item?.category || "",
+            country: item?.states_name_en || [],
+        })
     }
-    
+
     return (
         <div className="baner">
             <video
@@ -36,10 +38,14 @@ const Baner = ({ id }: BanerProps) => {
                     {item?.name_en && (
                         <>
                             <p>{item?.short_description_en}</p>
-                            <button className="btn btnBig btnPrimary" onClick={openModal}>Show object</button>    
+                            <button
+                                className="btn btnBig btnPrimary"
+                                onClick={openModal}
+                            >
+                                Show object
+                            </button>
                         </>
                     )}
-                    
                 </div>
             </div>
         </div>

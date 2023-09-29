@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useEffect, useRef } from "react"
 import Image from "next/image"
@@ -172,11 +172,22 @@ const Search = () => {
                     // onClick={() => setOpenSearch(true)}
                     onClick={openSearchHandler}
                 >
+                    <svg
+                        enableBackground="new 0 0 32 32"
+                        version="1.1"
+                        viewBox="0 0 32 32"
+                        width={22}
+                        height={22}
+                        className="visibleXs"
+                    >
+                        <path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" />
+                    </svg>
+
                     {formData.locations[0]
                         ? formData.locations.map((element) => element + ", ")
                         : "Search for a place..."}
                 </div>
-                <button className="btn btnIcon btnDark">
+                <button className="btn btnIcon btnDark hiddenXs">
                     <Image
                         src={img.src}
                         width={18}
@@ -190,71 +201,83 @@ const Search = () => {
                     <div className="dropdownMenu show">
                         <div className="rowCountries">
                             <h3>Europe</h3>
-                            <ul className="flagList textLeft">
-                                {(listCountriesEurope as FormResults[]).map(
-                                    (element: FormResults) => (
-                                        <li key={element.iso_code}>
+                            <div className="scroll">
+                                <ul className="flagList textLeft">
+                                    {(listCountriesEurope as FormResults[]).map(
+                                        (element: FormResults) => (
+                                            <li key={element.iso_code}>
+                                                <input
+                                                    id={
+                                                        element
+                                                            .states_name_en[0]
+                                                    }
+                                                    type="checkbox"
+                                                    name="locations"
+                                                    value={
+                                                        element
+                                                            .states_name_en[0]
+                                                    }
+                                                    onChange={
+                                                        handlePlacesChange
+                                                    }
+                                                    hidden
+                                                />
+                                                <label
+                                                    className="btn"
+                                                    htmlFor={
+                                                        element
+                                                            .states_name_en[0]
+                                                    }
+                                                >
+                                                    <Image
+                                                        className="radius"
+                                                        src={`/flags/${element.iso_code}.svg`}
+                                                        height={21}
+                                                        width={21}
+                                                        alt={
+                                                            element
+                                                                .states_name_en[0]
+                                                        }
+                                                    />
+                                                    <span>
+                                                        {
+                                                            element
+                                                                .states_name_en[0]
+                                                        }
+                                                    </span>
+                                                </label>
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                                <ul className="typesList textCenter">
+                                    {listTypes.map((element) => (
+                                        <li key={element}>
                                             <input
-                                                id={element.states_name_en[0]}
+                                                id={element}
                                                 type="checkbox"
-                                                name="locations"
-                                                value={
-                                                    element.states_name_en[0]
-                                                }
+                                                name="types"
+                                                value={element}
                                                 onChange={handlePlacesChange}
                                                 hidden
                                             />
                                             <label
                                                 className="btn"
-                                                htmlFor={
-                                                    element.states_name_en[0]
-                                                }
+                                                htmlFor={element}
                                             >
                                                 <Image
-                                                    className="radius"
-                                                    src={`/flags/${element.iso_code}.svg`}
-                                                    height={21}
-                                                    width={21}
-                                                    alt={
-                                                        element
-                                                            .states_name_en[0]
-                                                    }
+                                                    src={`/types/${element.toLowerCase()}.svg`}
+                                                    width={29}
+                                                    height={31}
+                                                    alt={element}
                                                 />
-                                                <span>
-                                                    {element.states_name_en[0]}
-                                                </span>
+                                                {element}
                                             </label>
                                         </li>
-                                    )
-                                )}
-                            </ul>
-                            <ul className="typesList textCenter">
-                                {listTypes.map((element) => (
-                                    <li key={element}>
-                                        <input
-                                            id={element}
-                                            type="checkbox"
-                                            name="types"
-                                            value={element}
-                                            onChange={handlePlacesChange}
-                                            hidden
-                                        />
-                                        <label
-                                            className="btn"
-                                            htmlFor={element}
-                                        >
-                                            <Image
-                                                src={`/types/${element.toLowerCase()}.svg`}
-                                                width={29}
-                                                height={31}
-                                                alt={element}
-                                            />
-                                            {element}
-                                        </label>
-                                    </li>
-                                ))}
-                            </ul>
-                            <div>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="buttonRow">
                                 <button
                                     type="submit"
                                     className="btn btnPrimary"

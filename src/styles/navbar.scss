@@ -1,5 +1,4 @@
-.navbar
-{
+.navbar {
     justify-content: space-between;
     align-items: center;
     display: flex;
@@ -7,95 +6,92 @@
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 10;
-    
-    &.shadowNavbar
-    {
+
+    .logo {
+        flex-grow: 1;
+    }
+
+    &.shadowNavbar {
         // box-shadow: 0 10px 10px rgb(0 0 0 / 5%);
         padding-top: 20px;
         padding-bottom: 20px;
-        background-color: rgba(256,256,256, 1%);
-        backdrop-filter: blur(30px)
+        background-color: rgba(256, 256, 256, 1%);
+        backdrop-filter: blur(30px);
     }
-    
-    .searchForm
-    {
-        flex-basis: 32%;
-        max-width: 430px;
-        
-        .relative 
-        {
+
+    .searchForm {
+        width: 47px;
+
+        .relative {
             width: 100%;
         }
-        
-        .dropdownMenu
-        {
+
+        .dropdownMenu {
             width: 90vw;
             top: 70px;
         }
-        
-        .formControl 
-        {
-            padding: 13px 45px 13px 23px; 
+
+        .formControl {
+            padding: 13px 10px;
             height: auto;
             overflow: hidden;
-            text-overflow: ellipsis;    
+            text-overflow: ellipsis;
             white-space: nowrap;
             background-color: #fff;
-            font-size: 1.4rem;
+            font-size: 0;
             width: 100%;
             font-style: italic;
             cursor: pointer;
-            
+            text-align: center;
+
             &.blocked,
             &:focus-visible,
-            &:focus 
-            {
+            &:focus {
                 font-style: normal;
                 cursor: not-allowed;
-                padding-right: 20px;
-                opacity: .7;
+                opacity: 0.7;
                 border: none;
                 outline: none;
                 justify-content: flex-start;
-                
-                & ~ .btn
-                {
+
+                & ~ .btn {
                     right: -45px;
                     opacity: 0;
                 }
             }
         }
-        
-        .btnIcon
-        {
+
+        .btnIcon {
             position: absolute;
             top: 4px;
             right: 4px;
             bottom: 4px;
             aspect-ratio: 1/1;
             padding: 0;
-            transition: all .3s ease;
+            transition: all 0.3s ease;
         }
     }
-    
-    .buttons
-    {
+
+    .buttons {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         gap: 10px;
     }
-    
-    .btn-add-place
-    {
-        opacity: .6;
+
+    .btn-add-place {
+        opacity: 0.6;
     }
-    
-    .rowCountries 
-    {
-        
-        label
-        {
+
+    .rowCountries {
+        max-height: calc(100vh - 140px);
+
+        .scroll {
+            max-height: calc(100vh - 140px - 80px);
+            overflow-y: auto;
+        }
+
+        label {
             border: 2px solid transparent;
             background-color: transparent;
             padding: 7px 10px;
@@ -103,58 +99,82 @@
             align-items: center;
             position: relative;
             left: 0;
-            transition: left .2s ease;
+            transition: left 0.2s ease;
             margin-bottom: 4px;
-            
-            &:hover 
-            {
+
+            &:hover {
                 left: -5px;
             }
         }
-        
-        input:checked + label
-        {
+
+        input:checked + label {
             border-color: #cba97a;
         }
-        
-        ul
-        {
+
+        ul {
             padding: 0;
             list-style: none;
-            
-            .radius 
-            {
-                border-radius: 50%;    
+
+            .radius {
+                border-radius: 50%;
             }
-            
-            img 
-            {
-                margin-right: 6px;   
-            }    
-            
+
+            img {
+                margin-right: 6px;
+            }
         }
-        
-        .flagList
-        {
+
+        .flagList {
             // columns: 4;
             margin: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
         }
-        
-        .typesList
-        {
+
+        .typesList {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 10px 0 20px;
             gap: 10px;
-            
-            label 
-            {
+
+            label {
                 padding-top: 2px;
                 padding-bottom: 2px;
             }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        .searchForm {
+            width: auto;
+            flex-basis: 32%;
+            max-width: 430px;
+
+            .formControl {
+                padding: 13px 45px 13px 23px;
+                font-size: 1.4rem;
+                text-align: left;
+
+                &:before {
+                    display: none;
+                }
+
+                &.blocked,
+                &:focus-visible,
+                &:focus {
+                    padding-right: 20px;
+                }
+            }
+            .flagList {
+                grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            }
+        }
+
+        .logo {
+            flex-grow: 0;
         }
     }
 }

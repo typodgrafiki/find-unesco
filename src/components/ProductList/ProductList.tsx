@@ -47,9 +47,7 @@ const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
                                 width={21}
                                 height={21}
                             />
-                            <a
-                                href={`/search?locations=${country}`}
-                            >
+                            <a href={`/search?locations=${country}`}>
                                 {countryTitle}
                             </a>
                         </h2>
@@ -66,7 +64,6 @@ const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
                         <small className="block">{typesTitle}</small>
                     </h2>
                 )}
-                
             </div>
             {!iso && <div>Liczba wyników: {numberElements}</div>}
             {elements.length ? (
@@ -79,8 +76,10 @@ const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
                             image={element.image}
                             states_name={element.states_name_en}
                             short_description={element.short_description_en}
-                            region_en={element.region_en}
+                            region={element.region_en}
                             index={index}
+                            homepage={iso ? true : false}
+                            link={element.link}
                         />
                     ))}
                 </div>
