@@ -1,0 +1,81 @@
+.shadowModal {
+    position: fixed;
+    inset: 0;
+    background: rgb(33 33 33 / 80%);
+    z-index: 10;
+}
+
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #00000069;
+    padding: 20px;
+    border-radius: 20px;
+    z-index: 11;
+
+    .modalTitle {
+        margin: 0 0 10px;
+    }
+
+    .close {
+        font-size: 0;
+        display: block;
+        position: absolute;
+        height: 28px;
+        width: 28px;
+        background-color: #ddd;
+        top: -10px;
+        right: -10px;
+        border-radius: 50%;
+        cursor: pointer;
+        color: #585858;
+        transition: all 0.2s ease;
+
+        &:before,
+        &:after {
+            display: block;
+            content: "";
+            height: 1px;
+            width: 12px;
+            background-color: currentColor;
+            position: absolute;
+            top: 14px;
+            left: 8px;
+            transform: rotate(45deg);
+            transition: all 0.2s ease;
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        &:hover {
+            background-color: #585858;
+            color: #fff;
+        }
+    }
+
+    .image {
+        margin-bottom: 13px;
+    }
+
+    .modalFooter {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .category {
+        margin-top: 10px;
+        b {
+            font-weight: 500;
+            color: var(--dark);
+        }
+    }
+
+    .link {
+        margin-top: 13px;
+    }
+}
