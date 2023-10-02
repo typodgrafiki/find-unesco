@@ -29,8 +29,24 @@ const Baner = ({ id }: BanerProps) => {
                 autoPlay
                 loop
                 muted
+                poster="/video/1041/poster.jpg"
             >
-                <source src="/baner1041.mp4" />
+                <source
+                    type="video/webm"
+                    sizes="1920x1080"
+                    src="/video/1041/w-1920.webm"
+                />
+                <source
+                    type="video/webm"
+                    sizes="720x1280"
+                    src="/video/1041/w-mobile.webm"
+                />
+
+                <source
+                    type="video/mp4"
+                    sizes="720x1280 1920x1080"
+                    srcSet="/video/1041/w-mobile.mp4, /video/1041/w-1920.mp4"
+                />
             </video>
             <div className="container relative">
                 <div className="caption">

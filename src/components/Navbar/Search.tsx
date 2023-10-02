@@ -5,14 +5,8 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
 import img from "@/assets/images/search.svg"
-import { listItems } from "@/utils/filteredPlaces"
 import listPlaces from "@/lib/listPlacesUnesco.json"
-import {
-    countriesEurope as listEurope,
-    listTypes,
-    listPlacesEurope,
-    listCountriesEurope,
-} from "@/utils/filteredPlaces"
+import { listTypes, listCountriesEurope } from "@/utils/filteredPlaces"
 import { FormResults } from "@/context/ThemeContext"
 
 const Search = () => {
@@ -77,10 +71,6 @@ const Search = () => {
     // przechwytywanie wysylania formularza serch
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
-        // console.log("Kraje:", formData.locations)
-        // console.log("Typy:", formData.types)
-        // console.log(formResults.results)
 
         const url = () => {
             const returnLocations: string | null = (() => {
