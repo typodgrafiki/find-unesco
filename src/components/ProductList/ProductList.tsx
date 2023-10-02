@@ -12,8 +12,6 @@ interface ProductListProps {
 }
 
 const ProductList: FC<ProductListProps> = ({ country, iso, types }) => {
-    // const countryLowerCase: string = country?.toLowerCase() || ''
-
     const countryArray: string[] = toArray(country || "")
     const countryTitle: string = countryArray.join(", ")
     const typesArray: string[] = toArray(types || "")
