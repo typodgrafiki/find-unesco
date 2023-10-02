@@ -26,7 +26,6 @@ const Homepage = () => {
                         iso="ch"
                     />
                 </div>
-                wdwefwefewf
                 <Loading />
             </FrontendLayout>
         </>
