@@ -17,8 +17,14 @@ const Map = () => {
 
     const mapContainer = useRef(null)
     const map = useRef<mapboxgl.Map | null>(null)
-    const { formResults, setFormResults, selectItemIndex, setSelectItemIndex } =
-        useGlobalContext()
+    const {
+        formResults,
+        setFormResults,
+        selectItemIndex,
+        setSelectItemIndex,
+        loading,
+        setLoading,
+    } = useGlobalContext()
 
     const typesInArray = (types && types.split(",")) || []
     const locationsInArray = (country && country.split(",")) || []
@@ -144,6 +150,10 @@ const Map = () => {
 
         return result
     }
+
+    useEffect(() => {
+        setLoading(false)
+    }, [loading])
 
     useEffect(() => {
         if (map.current) return // initialize map only once

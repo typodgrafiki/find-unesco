@@ -53,6 +53,8 @@ interface ThemeContextType {
     setSelectItemIndex: Dispatch<SetStateAction<number | null>>
     searchQuery: any[]
     setSearchQuery: Dispatch<SetStateAction<any[]>>
+    loading: boolean
+    setLoading: Dispatch<SetStateAction<boolean>>
 }
 
 const ThemeContext = createContext<ThemeContextType>({
@@ -75,6 +77,8 @@ const ThemeContext = createContext<ThemeContextType>({
     setSelectItemIndex: () => {},
     searchQuery: [],
     setSearchQuery: () => {},
+    loading: false,
+    setLoading: () => {},
 })
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -91,6 +95,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     })
     const [formResults, setFormResults] = useState<FormResults[]>([])
     const [selectItemIndex, setSelectItemIndex] = useState<number | null>(null)
+    const [loading, setLoading] = useState(false)
 
     return (
         <ThemeContext.Provider
@@ -107,6 +112,8 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
                 setFormResults,
                 selectItemIndex,
                 setSelectItemIndex,
+                loading,
+                setLoading,
             }}
         >
             {children}

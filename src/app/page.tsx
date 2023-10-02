@@ -1,6 +1,7 @@
 import FrontendLayout from "@/app/(routes)/layout"
 import Baner from "@/components/Baner"
 import ProductList from "@/components/ProductList/ProductList"
+import Loading from "@/components/modals/Loading"
 
 const Homepage = () => {
     return (
@@ -8,23 +9,25 @@ const Homepage = () => {
             <FrontendLayout>
                 <Baner id={1041} />
                 <div className="container">
-                    <ProductList 
-                        country="Poland" 
+                    <ProductList
+                        country="Poland"
                         iso="pl"
                     />
-                    <ProductList 
-                        country="Italy" 
+                    <ProductList
+                        country="Italy"
                         iso="it"
                     />
-                    <ProductList 
-                        country="Norway" 
+                    <ProductList
+                        country="Norway"
                         iso="no"
                     />
-                    <ProductList 
-                        country="Switzerland" 
+                    <ProductList
+                        country="Switzerland"
                         iso="ch"
                     />
                 </div>
+                wdwefwefewf
+                <Loading />
             </FrontendLayout>
         </>
     )

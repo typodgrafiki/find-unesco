@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useGlobalContext } from "@/context/ThemeContext"
@@ -17,8 +17,8 @@ const Search = () => {
         setOpenSearch,
         formData,
         setFormData,
-        formResults,
         setFormResults,
+        setLoading,
     } = useGlobalContext()
 
     // przechwytuje zdarzenie klikniecia w zamkniecie dropdown
@@ -103,6 +103,8 @@ const Search = () => {
         }
 
         if (formData.locations.length > 0) {
+            setLoading(true)
+
             router.push(url())
 
             const filteredElements3 = (country: string[], types: string[]) => {
