@@ -24,13 +24,13 @@ const Newsletter: React.FC = () => {
                     `/newsletter/add?email=${email}`
                 )
                 if (response.data.success) {
-                    setAlert("Zapisałeś się na newsletter.")
+                    setAlert("You have signed up for the newsletter.")
                 } else {
-                    setAlert("Zapisałeś się na newsletter.")
+                    setAlert("You have signed up for the newsletter.")
                 }
                 setEmail("")
             } catch (error) {
-                setAlert("Błąd połączenia, spróbuj później.")
+                setAlert("Connection error, please try again later.")
             } finally {
                 setLoading(false)
                 setTimeout(() => {
