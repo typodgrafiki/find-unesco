@@ -1,37 +1,41 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import axios from "axios"
+import { Dispatch, SetStateAction } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "@/styles/newsletter.scss"
 import "react-toastify/dist/ReactToastify.css"
+import { Alert } from "flowbite-react"
 
 const Newsletter: React.FC = () => {
     const [email, setEmail] = useState("")
+    const [alert, setAlert] = useState("")
+    const [loading, setLoading] = useState(false)
+
+    const formRef = useRef<HTMLFormElement>(null)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         if (email) {
+            await setLoading(true)
             try {
                 const response = await axios.post(
                     `/newsletter/add?email=${email}`
                 )
-                console.log(response.data.email)
                 if (response.data.success) {
-                    toast.success("Zapisałeś się na newsletter", {
-                        position: toast.POSITION.BOTTOM_CENTER,
-                    })
-
-                    //zresetowac form
+                    setAlert("Zapisałeś się na newsletter.")
                 } else {
-                    toast.error("Adres jest już na liście subskrybentów", {
-                        position: toast.POSITION.BOTTOM_CENTER,
-                    })
+                    setAlert("Zapisałeś się na newsletter.")
                 }
+                setEmail("")
             } catch (error) {
-                toast.error("Błąd połączenia, spróbuj później.", {
-                    position: toast.POSITION.BOTTOM_CENTER,
-                })
+                setAlert("Błąd połączenia, spróbuj później.")
+            } finally {
+                setLoading(false)
+                setTimeout(() => {
+                    setAlert("")
+                }, 3000)
             }
         }
     }
@@ -48,6 +52,7 @@ const Newsletter: React.FC = () => {
                     <form
                         onSubmit={handleSubmit}
                         className="flex"
+                        ref={formRef}
                     >
                         <input
                             className="formControl"
@@ -59,14 +64,38 @@ const Newsletter: React.FC = () => {
                         <button
                             type="submit"
                             className="btn btnPrimary nowrap"
+                            disabled={loading}
                         >
-                            Sign in
+                            {loading ? "Adding..." : "Sign in"}
                         </button>
                     </form>
                 </div>
             </section>
-            <ToastContainer />
+            {alert && (
+                <DismissableAlert
+                    alert={alert}
+                    closeFn={setAlert}
+                />
+            )}
         </>
+    )
+}
+
+function DismissableAlert({
+    alert,
+    closeFn,
+}: {
+    alert: string
+    closeFn: Dispatch<SetStateAction<string>>
+}) {
+    return (
+        <div
+            className="alert flex"
+            onClick={() => closeFn("")}
+        >
+            <p>{alert}</p>
+            <button>X</button>
+        </div>
     )
 }
 

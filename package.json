@@ -16,6 +16,7 @@
         "axios": "^1.5.0",
         "eslint": "8.40.0",
         "eslint-config-next": "13.4.2",
+        "flowbite-react": "^0.6.4",
         "mapbox-gl": "^2.15.0",
         "next": "13.4.8",
         "react": "18.2.0",
